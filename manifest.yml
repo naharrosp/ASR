@@ -1,8 +1,8 @@
 ---
 applications:
- - name: GetStartedTomcat
-   random-route: true
-   path: target/GetStartedTomcat.war
-   memory: 256M
-   instances: 1
-   buildpack: java_buildpack
+- name: PracticaFinalASR
+  memory: 512M
+  host: PracticaFinalASR
+  domain: eu-gb.mybluemix.net
+  services:
+  - prueba1
