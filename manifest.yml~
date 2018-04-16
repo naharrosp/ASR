@@ -1,11 +1,8 @@
 ---
 applications:
- - name: ProyectoFinalASR
-   path: target/GetStartedTomcat.war
-   memory: 256M
-   instances: 1
-   buildpack: java_buildpack
-   host: ProyectoFinalASR
-   domain: eu-gb.mybluemix.net
+- name: PracticaFinalASR
+  memory: 512M
+  host: PracticaFinalASR
+  domain: eu-gb.mybluemix.net
   services:
-   - prueba1
+  - prueba1

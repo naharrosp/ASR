@@ -4,5 +4,6 @@ applications:
   memory: 512M
   host: PracticaFinalASR
   domain: eu-gb.mybluemix.net
+  buildpack: java_buildpack
   services:
   - prueba1
