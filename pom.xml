@@ -10,7 +10,7 @@
   </parent>
 
   <groupId>net.wasdev.wlp.sample</groupId>
-  <artifactId>GetStartedTomcat</artifactId>
+  <artifactId>PracticaFinalASR</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -92,7 +92,7 @@
           <version>2.6</version>
           <configuration>
             <failOnMissingWebXml>false</failOnMissingWebXml>
-            <warName>GetStartedTomcat</warName>
+            <warName>PracticaFinalASR</warName>
           </configuration>
         </plugin>
       </plugins>
