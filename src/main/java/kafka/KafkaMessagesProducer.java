@@ -31,7 +31,7 @@ import org.apache.kafka.common.errors.TimeoutException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import IBMConnector.MessageHubConsoleSample;
+import IBMKafkaConnector.MessageHubConsoleSample;
 
 
 public class KafkaMessagesProducer {

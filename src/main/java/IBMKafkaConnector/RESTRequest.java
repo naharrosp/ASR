@@ -17,7 +17,7 @@
  * Licensed Materials - Property of IBM
  * (c) Copyright IBM Corp. 2015-2016
  */
-package IBMConnector;
+package IBMKafkaConnector;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

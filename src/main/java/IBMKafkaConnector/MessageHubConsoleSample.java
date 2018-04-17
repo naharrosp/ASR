@@ -17,7 +17,7 @@
  * Licensed Materials - Property of IBM
  * (c) Copyright IBM Corp. 2015-2016
  */
-package IBMConnector;
+package IBMKafkaConnector;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,9 +31,9 @@ import java.util.Properties;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import IBMConnector.BluemixEnvironment;
-import IBMConnector.MessageHubCredentials;
-import IBMConnector.RESTAdmin;
+import IBMKafkaConnector.BluemixEnvironment;
+import IBMKafkaConnector.MessageHubCredentials;
+import IBMKafkaConnector.RESTAdmin;
 
 /**
  * Console-based sample interacting with Message Hub, authenticating with SASL/PLAIN over an SSL connection.

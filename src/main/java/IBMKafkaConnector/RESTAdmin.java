@@ -17,7 +17,7 @@
  * Licensed Materials - Property of IBM
  * (c) Copyright IBM Corp. 2015-2016
  */
-package IBMConnector;
+package IBMKafkaConnector;
 
 /**
  * Facade to access IBM Message Hub REST Admin API

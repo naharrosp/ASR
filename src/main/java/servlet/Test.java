@@ -7,8 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import IBMConnector.MessageHubConsoleSample;
+import IBMKafkaConnector.MessageHubConsoleSample;
+import daoCloudant.CloudantUsuarioDAO;
+import dominio.Usuario;
 import kafka.KafkaMessagesConsumer;
 import kafka.KafkaMessagesProducer;
 
@@ -33,7 +34,7 @@ public class Test extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
+		/*//Ejemplo KAFKA
 		MessageHubConsoleSample.initMessageHubProperties("kafka02-prod02.messagehub.services.eu-gb.bluemix.net:9093,   kafka04-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka01-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka03-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka05-prod02.messagehub.services.eu-gb.bluemix.net:9093", "https://kafka-admin-prod02.messagehub.services.eu-gb.bluemix.net:443", "ToMM873rB0nmgldXovJ9B2cwUgbRKTxvsQjVf6pwTIkGCbZF");
 		
 		MessageHubConsoleSample.createTopic("chat2");
@@ -46,7 +47,18 @@ public class Test extends HttpServlet {
         
 		KafkaMessagesProducer producer= new KafkaMessagesProducer("chat1");
 		producer.send("Hola", "chat2");
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());*/
+		
+		Usuario prueba= new Usuario ("pablosn", "Pablo");
+		prueba.addChat("chat1");
+		prueba.addChat("chat2");
+		prueba.addChat("chat3");
+		
+		CloudantUsuarioDAO dao= new CloudantUsuarioDAO();
+		dao.persist(prueba);
+		System.out.println(dao.get("pablosn"));
+		dao.delete("pablosn");
+		
 	}
 
 	/**

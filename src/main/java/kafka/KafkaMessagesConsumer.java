@@ -30,7 +30,7 @@ import org.apache.kafka.common.errors.WakeupException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import IBMConnector.MessageHubConsoleSample;
+import IBMKafkaConnector.MessageHubConsoleSample;
 
 public class KafkaMessagesConsumer implements Runnable {
     private static final Logger logger = Logger.getLogger(KafkaMessagesConsumer.class);
