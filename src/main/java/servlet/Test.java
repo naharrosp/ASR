@@ -1,4 +1,9 @@
 package servlet;
+/*
+ *
+ * Un header chostico
+ *
+ */
 
 import java.io.IOException;
 import javax.servlet.ServletException;
