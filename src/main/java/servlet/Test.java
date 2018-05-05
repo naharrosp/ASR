@@ -50,7 +50,8 @@ public class Test extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());*/
 
 		Usuario prueba= new Usuario ("pablosn", "Pablo");
-		prueba.addChat("chat1");
+        // chotis
+        // otis motis
 		prueba.addChat("chat2");
 		prueba.addChat("chat3");
 
