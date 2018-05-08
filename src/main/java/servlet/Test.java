@@ -1,7 +1,5 @@
 package servlet;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import daoCloudant.CloudantUsuarioDAO;
+
 import dominio.Usuario;
 
 /**
@@ -48,10 +47,6 @@ public class Test extends HttpServlet {
         KafkaMessagesProducer producer= new KafkaMessagesProducer("chat1");
         producer.send("Hola", "chat2");
         response.getWriter().append("Served at: ").append(request.getContextPath());*/
-
-        List<String> lista = new ArrayList<String>();
-        if( lista.isEmpty() )
-            System.out.println( "La lista esta vacia" );
 
         Usuario prueba= new Usuario ("pablosn", "Pablo");
         prueba.addChat("chat2");

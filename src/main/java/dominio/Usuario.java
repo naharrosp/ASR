@@ -1,20 +1,22 @@
 package dominio;
 
-import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Usuario {
-	
+
 	private String _id;
 	private String _rev;
 	private String name = null;
-	private HashSet <String> chats = new HashSet<String>();
-	
-	
+	private Set <String> chats = new TreeSet<String>();
+
+
 	public Usuario(String _id, String name) {
 		super();
 		this._id = _id;
 		this.name = name;
 	}
+
 	public String get_id() {
 		return _id;
 	}
@@ -33,18 +35,18 @@ public class Usuario {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public HashSet<String> getChats() {
+	public Set<String> getChats() {
 		return chats;
 	}
 	public void addChat(String chat) {
 		this.chats.add(chat);
 	}
-	
+
 	public void removeChat(String chat) {
 		this.chats.remove(chat);
 	}
 
-	
+
 	@Override
 	public String toString() {
 		return "Usuario [_id=" + _id + ", _rev=" + _rev + ", name=" + name + ", chats=" + chats + "]";
@@ -72,7 +74,7 @@ public class Usuario {
 			return false;
 		return true;
 	}
-	
-	
+
+
 
 }
