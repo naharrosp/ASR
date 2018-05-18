@@ -33,5 +33,16 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="var" path="M2_REPO/com/cloudant/cloudant-client/2.7.0/cloudant-client-2.7.0.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/org/glassfish/jersey/containers/jersey-container-servlet/2.25.1/jersey-container-servlet-2.25.1.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/org/glassfish/jersey/media/jersey-media-json-jackson/2.25.1/jersey-media-json-jackson-2.25.1.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/org/apache/kafka/kafka-clients/1.1.0/kafka-clients-1.1.0.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/com/cloudant/cloudant-client/2.12.0/cloudant-client-2.12.0.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/javax/websocket/javax.websocket-api/1.1/javax.websocket-api-1.1.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/com/google/code/gson/gson/2.8.4/gson-2.8.4.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/jstl/jstl/1.2/jstl-1.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
