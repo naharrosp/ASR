@@ -39,12 +39,12 @@ public class RoomService {
 					 
 		  }
 
-		  public static void clientToRoom( ) throws roomException{
+		  public static void clientToRoom( ) throws RoomException{
 					 // Envía
 
 		  }
 
-		  public static void roomToClient() throws roomException{
+		  public static void roomToClient() throws RoomException{
 
 		  }
 

@@ -15,7 +15,7 @@ import dominio.Usuario;
  * Servlet implementation class Test
  */
 
-@WebServlet("/Test")
+@WebServlet("/Test1")
 public class Test extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

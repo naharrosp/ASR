@@ -1,7 +1,7 @@
 package service;
 import kafka.KafkaMessagesProducer;
 
-import service.RoomService.Room;
+import service.Room;
 
 public class RoomUser{ //Handeler de los mensajes
 					 String name;

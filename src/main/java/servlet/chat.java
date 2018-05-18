@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class Test
  */
 
-@WebServlet("/Test")
+@WebServlet("/Test2")
 public class chat extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
