@@ -1,5 +1,5 @@
 
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
 
@@ -39,16 +39,16 @@
 
 					 <%--ALWAYS CHECK IF HAS USER--%>
 					 <ul class="navbar-nav my-lg-0">
-								<c:if select = "${userf}">
+								<%--<c:if select = "${userf}">--%>
 										  <li class="nav-item active">
 													 <a href="">logout</a>
 										  </li>
-								</c:if>
-								<c:if select = "${!userf}">
+								<%--</c:if>--%>
+								<%--<c:if select = "${!userf}">
 										  <li class="nav-item active">
 													 <a href="">login</a>
 										  </li>
-								</c:if>
+								</c:if>--%>
 					 </ul>
 		  </div>
 </nav>

@@ -1,22 +1,21 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix = "c"  uri = "http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 		  <head>
-					 <c:import page=/imports.jsp"/>
+					 <c:import url="/imports.jsp"/>
 					 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 					 <title>Chat - ${chat.name}</title>
 		  </head>
 		  <body>
-					 <c:import page="/navbar.jsp"/>
+					 <c:import url="/navbar.jsp"/>
 
 					 <%--HIDDEN DIV CON TODA LA INFORMACIÓN ACERCA DE COLORES ASOCIADA --%>
 					 <div id="usersInfo" style="visibility:none">
 								<%--${}--%>
 					 </div>
 
-					 <c:import page="/navbar.jsp"/>
 					 <div class="container">
 								<ul id="message-board">
 								</ul>
