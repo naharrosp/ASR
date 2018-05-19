@@ -7,13 +7,16 @@
  -------------------------------------------------------*/
 var photoLoginModule = (function(){
 
-		  Webcam.set({
-								width: 320,
-								height: 240,
-								image_format: 'jpeg',
-								jpeg_quality: 90
-		  });
-		  Webcam.attach( '#my_camera' );
+		  if(Webcam != null){
+					 Webcam.set({
+										  width: 320,
+										  height: 240,
+										  image_format: 'jpeg',
+										  jpeg_quality: 90
+					 });
+					 Webcam.attach( '#my_camera' );
+		  }
+
 
 		  var dataSrc;
 
@@ -23,6 +26,10 @@ var photoLoginModule = (function(){
 		  return{
 					 take_snapshot: function(){
 								// take snapshot and get image data
+								if( Webcam === null){
+										  alert("Webacamjs not imported");
+										  return;
+								}
 								Webcam.snap( function(data_uri) {
 										  // display results in page
 										  dataSrc=data_uri;
@@ -35,6 +42,10 @@ var photoLoginModule = (function(){
 					 },
 
 					 upoad_image: function(){
+								if( Webcam === null){
+										  alert("Webacamjs not imported");
+										  return;
+								}
 								//Recuperar la uri de la imagen
 
 								//INVESTIGAR CÓMO SUBIR UNA IMÁGEN EN FORMATO BASE 64

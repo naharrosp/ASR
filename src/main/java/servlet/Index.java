@@ -1,5 +1,6 @@
 package servlet;
 
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +29,10 @@ public class Index extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String view = (String) request.getParameter("view");
-		//response.getWriter().append("Served at: ").append(view);
+		if(view==null){
+				  response.getWriter().println("Nothing to show, give a view parameter");
+				  return;
+		}
 		request.getRequestDispatcher(view).forward(request,response);
 	}
 

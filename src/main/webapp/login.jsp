@@ -12,24 +12,32 @@ pageEncoding="UTF-8"%>
 					 <c:import url="/navbar.jsp"/>
 
 					 <div class="container text-center">
-
-								<div class="col-sm-3"> </div>
-								<form role="form" action="" method="POST" class="col-sm-6 form-signin">
-								<%--IMAGEN --%>
-										  <label for="inputEmail" class="sr-only">Email address</label>
-										  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-										  <label for="inputPassword" class="sr-only">Password</label>
-										  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-										  <label class=mb-4">Nombre de usuario:</label>
-										  <input type="text" name="username" required autofocus>
-										  <br>
-										  <label>Contraseña:</label>
-										  <input type="password" name="password">
-										  <br>
-										  <input type="submit" class="btn btn-default" value="Login!">
-										  <br>
-								</form>
-								<div class="col-sm-3"></div>
+					 <%--<div class="container">--%>
+								<div class="row">
+										  <div class="col-sm-2"> </div>
+										  <div class="col-sm-8">
+													 <pre>
+#    #    #    ####### #    #    #     #####  #     #    #    ####### 
+#   #    # #   #       #   #    # #   #     # #     #   # #      #    
+#  #    #   #  #       #  #    #   #  #       #     #  #   #     #    
+###    #     # #####   ###    #     # #       ####### #     #    #    
+#  #   ####### #       #  #   ####### #       #     # #######    #    
+#   #  #     # #       #   #  #     # #     # #     # #     #    #    
+#    # #     # #       #    # #     #  #####  #     # #     #    #    
+Better than irc!!
+													 </pre>
+													 <form role="form" action="" method="POST" >
+																<%--IMAGEN --%>
+																<label for="inputEmail" class="sr-only">Username</label>
+																<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+																<label for="inputPassword" class="sr-only">Password</label>
+																<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+																<br>
+																<input type="submit" class="btn btn-default" value="Login!">
+													 </form>
+										  </div>
+										  <div class="col-sm-2"></div>
+								</div>
 					 </div>
 		  </body>
 </html>
