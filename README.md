@@ -8,13 +8,20 @@
 /_/ |_/_/  |_/_/   /_/ |_/_/  |_\____/_/ /_/_/  |_/_/     
 ```
                                                           
-!Mejor que IRC
+Mejor que IRC!
+
+Proyecto crado como práctica final de Arquitectura de Servicios Red (Asignatura de ICAI) para el curso de 2018.
+
+Preparado para funcionar en IBM Bluemix.
 
 # Características
 
 * Conexión con el chat mediante websockets desde cliente hasta el servidor
 * Inteacción kafka con el chat una vez llegado el mensaje al servidor
 * Reconocimiento de sexo y edad para evitar suplantación de la identidad
+
+# Capturas de pantalla
+
 
 # Sobre
 
