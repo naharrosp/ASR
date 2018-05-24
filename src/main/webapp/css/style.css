@@ -9,4 +9,32 @@
 		  color: white;
 }
 
+.msgAuthor{
+
+}
+
+.msgContent{
+
+}
+
+.chatMsg{
+
+}
+
+/*TODO: añadir más atributos a los colores*/
+.chatMsg.red{
+		  color: red;
+}
+
+.chatMsg.green{
+		  color: red;
+}
+
+.chatMsg.blue{
+		  color: red;
+}
+
+.chatMsg.orange{
+		  color: red;
+}
 

@@ -1,7 +1,3 @@
-/**
- * 
- */
-
 /*-------------------------------------------------------
  PHOTO LOGIN
  -------------------------------------------------------*/
@@ -72,8 +68,79 @@ function upoad_image(){
 })()
 
 
+/*-------------------------------------------------------
+ CHAT
+ -------------------------------------------------------*/
+chatModule = (function(){
 
+		  var socket;
 
+		  function onMessage( message ){
+					 var data = JSON.parse(message.data); //TODO: comprobar que se debe atender a data
 
+					 //Añadir un mensaje al log de mensajes
+					 var htmlcode =  ''+
+								'<div class="chatMsg '+ data.color +'">'+
+								'<div class="msgContent">'+ data.message +'</div>'+
+								'<div class="msgAuthor">'+ data.author +'</div>'+
+								'</div>';
 
+					 $.("#msgFeed").innerHTML.append(htmlcode);
+		  }
 
+		  return{
+					 connect: function(){
+
+								if( websocket != null )
+										  return 
+
+								//Obtener id de usuario y nombre de la habitación
+								var userid = $.("#userid").innerHTML; //TODO: comprobar código html y div.
+								var room = $.("#roomPath").innerHTML; //TODO: comprobar código html y div.
+								var path = window.location.hostname;//TODO: comprobar parámetro
+
+								socket = new WebSockets( path );
+
+								var msg = JSON.stringify({
+													 user: userid,
+													 room: room
+								});
+
+								socket.addEventListener('open', (open)=>{
+										  //Enviamos el mensaje de arranque de la conexión
+										  socket.send(msg);
+								});
+								socket.addEventListener('onmessage', onMessage);
+								socket.addEventListener('onerror',(error)=>{
+										  alert('Error' + JSON.stingify(error));
+										  socket.close();
+										  socket = null;
+								});
+								socket.addEventListener('onclose',(close)=>{
+										  alert('Error' + JSON.stingify(error));
+										  socket.close();
+										  socket = null;
+								});
+					 }
+					 
+					 send: function( msg ){
+								if( socket.readyState != 1 ){
+										  alert("El socket no esta conectado, estado: " + socket.readyState);
+										  return
+								}
+								//TODO: comprobar si el mensaje es accionado desde un formulario o si se adquiere la información manualmente
+								var msg_ = $.('#msgTextBox').innerHTML;
+
+								//borramos la caja de texto
+								$.('#msgTextBox').value = '';
+								socket.send(msg);
+					 }
+		  }
+})()
+
+//EXPORTS
+function socket_connect(){
+		  chatModule.connect();
+}
+function socket_send(msg){
+		  chatModule.send(msg);
