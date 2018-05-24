@@ -22,7 +22,12 @@ Preparado para funcionar en IBM Bluemix.
 
 # Capturas de pantalla
 
+ ```
+ Incluir imágenes
+ ```
 
 # Sobre
 
-Creado por Pablo Sanchez Naharro y Fernando Fernández Soto
+Creado por Pablo Sanchez Naharro y Fernando Fernández Soto  
+
+
