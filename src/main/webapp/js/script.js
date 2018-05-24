@@ -1,6 +1,9 @@
 /*-------------------------------------------------------
  PHOTO LOGIN
  -------------------------------------------------------*/
+
+//TODO: incluir subida de la imágen
+
 var photoLoginModule = (function(){
 
 		  if(Webcam != null){
@@ -12,7 +15,6 @@ var photoLoginModule = (function(){
 					 });
 					 Webcam.attach( '#my_camera' );
 		  }
-
 
 		  var dataSrc;
 
@@ -85,7 +87,7 @@ chatModule = (function(){
 								'<div class="msgAuthor">'+ data.author +'</div>'+
 								'</div>';
 
-					 $.("#msgFeed").innerHTML.append(htmlcode);
+					 $.("#msgFeed").append(htmlcode);
 		  }
 
 		  return{
@@ -95,8 +97,8 @@ chatModule = (function(){
 										  return 
 
 								//Obtener id de usuario y nombre de la habitación
-								var userid = $.("#userid").innerHTML; //TODO: comprobar código html y div.
-								var room = $.("#roomPath").innerHTML; //TODO: comprobar código html y div.
+								var userid = $.('#dataContainer').data('userid'); //TODO: comprobar código html y div.
+								var userid = $.('#dataContainer').data('room'); //TODO: comprobar código html y div.
 								var path = window.location.hostname;//TODO: comprobar parámetro
 
 								socket = new WebSockets( path );
@@ -144,3 +146,12 @@ function socket_connect(){
 }
 function socket_send(msg){
 		  chatModule.send(msg);
+}
+
+/*-------------------------------------------------------
+ EVENTS
+ -------------------------------------------------------*/
+$(document).ready(function(){
+		  if( window.location.pathname === '/chat' ) //El evento se limita a la página
+					 socket_connect();
+}
