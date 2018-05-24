@@ -20,7 +20,7 @@ En esta ventana existe un div con la información sobre el id de usuario y el id
 /**
  * Servlet implementation class roomManager
  */
-@WebServlet("/roomManager")
+@WebServlet("/chat")
 public class roomManager extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -69,5 +69,4 @@ public class roomManager extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

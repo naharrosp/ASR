@@ -6,15 +6,22 @@ import java.util.TreeSet;
 public class Usuario {
 
 	private String _id;
-	private String _rev;
 	private String name = null;
+	private String password = null;
+	private ImageData imageData;
 	private Set <String> chats = new TreeSet<String>();
 
 
-	public Usuario(String _id, String name) {
+	public Usuario(String _id) { //Debe ser utilizado solamente para comparar con nuevos usuarios
 		super();
 		this._id = _id;
+	}
+
+	public Usuario(String _id, String name, String password, ImageData imageData) {//Para nuevos usuarios
+		this._id = _id;
 		this.name = name;
+		this.password = password;
+		this.imageData = imageData;
 	}
 
 	public String get_id() {
@@ -23,21 +30,29 @@ public class Usuario {
 	public void set_id(String _id) {
 		this._id = _id;
 	}
-	public String get_rev() {
-		return _rev;
-	}
-	public void set_rev(String _rev) {
-		this._rev = _rev;
-	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public Set<String> getChats() {
 		return chats;
 	}
+	public ImageData getImageData() {
+		return imageData;
+	}
+	public void setImageData(ImageData imageData) {
+		this.imageData = imageData;
+	}
+
 	public void addChat(String chat) {
 		this.chats.add(chat);
 	}
@@ -46,18 +61,6 @@ public class Usuario {
 		this.chats.remove(chat);
 	}
 
-
-	@Override
-	public String toString() {
-		return "Usuario [_id=" + _id + ", _rev=" + _rev + ", name=" + name + ", chats=" + chats + "]";
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((_id == null) ? 0 : _id.hashCode());
-		return result;
-	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -74,7 +77,6 @@ public class Usuario {
 			return false;
 		return true;
 	}
-
 
 
 }
