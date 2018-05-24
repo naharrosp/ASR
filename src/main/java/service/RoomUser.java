@@ -1,24 +1,23 @@
 package service;
+import kafka.KafkaMessagesConsumer;
 import kafka.KafkaMessagesProducer;
-
-import service.Room;
 
 public class RoomUser{ //Handeler de los mensajes
 					 String name;
-					 Room room;
 					 String color;
 
 					 KafkaMessagesProducer producer;
+					 KafkaMessagesConsumer consumer;
 
 					 /**
 					  * @param name
 					  * @param room
 					  */
-					 public RoomUser(String name, Room room, String roomStr) {
+					 public RoomUser(String name, String userid, String roomStr) {
 								this.name = name;
-								this.room = room;
 								this.color = "red"; //Hacer aleatorio
 								KafkaMessagesProducer producer = new KafkaMessagesProducer( roomStr );
+								KafkaMessagesProducer consumer = new KafkaMessagesProducer( userid );
 					 }
 
 					 /**
@@ -33,20 +32,6 @@ public class RoomUser{ //Handeler de los mensajes
 					  */
 					 public void setName(String name) {
 								this.name = name;
-					 }
-
-					 /**
-					  * @return the room
-					  */
-					 public Room getRoom() {
-								return room;
-					 }
-
-					 /**
-					  * @param room the room to set
-					  */
-					 public void setRoom(Room room) {
-								this.room = room;
 					 }
 
 					 /**

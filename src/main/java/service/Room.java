@@ -1,21 +1,21 @@
 package service;
 
-import java.io.Writer;
-import java.util.Set;
+import java.util.Collection;
 
 import kafka.KafkaMessagesConsumer;
 import kafka.KafkaMessagesProducer;
 
-class Room{
+public class Room{ //HUB de mensajes kafka
+
 		  public Room( String chat) {
-					 consumer = new KafkaMessagesConsumer( chat );
+					 //consumer = new KafkaMessagesConsumer( chat );
 		  }
 
 
 		  // Cada room tiene múltiples productores y consumidores
-		  private Set<Writer> writers;  //Set de outpt writers (envío e mensajes)
 		  //private Set<MessageHandler.Whole<InputMessage>> readers;  //Set de message handelers 
-		  private KafkaMessagesConsumer consumer;
+		  private Collection<KafkaMessagesConsumer> consumer;
+		  private Collection<KafkaMessagesProducer> producer;
 
 		  //Añadir mensajes de broadcast 
 

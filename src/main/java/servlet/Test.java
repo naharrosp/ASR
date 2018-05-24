@@ -56,7 +56,6 @@ public class Test extends HttpServlet {
         dao.persist(prueba);
         System.out.println(dao.get("pablosn"));
         dao.delete("pablosn");
-
     }
 
     /**
