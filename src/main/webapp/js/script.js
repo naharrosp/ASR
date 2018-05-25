@@ -76,7 +76,7 @@ chatModule = (function(){
 
 		  var socket;
 
-		  function onMessage( message ){
+		  function onMessageChat( message ){
 					 var data = JSON.parse(message.data); //TODO: comprobar que se debe atender a data
 
 					 //Añadir un mensaje al log de mensajes
@@ -86,11 +86,18 @@ chatModule = (function(){
 								'<div class="msgAuthor">'+ data.author +'</div>'+
 								'</div>';
 
-					 $.("#msgFeed").append(htmlcode);
+					 $.('#msgFeed').append(htmlcode);
+		  }
+		  function onMessageRooms( message ){
+
+					 var data = JSON.parse(message.data); //TODO: comprobar que se debe atender a data
+					 var target = data.room;
+					 var count = $.('#'+target).innerHTML
+					 $.('#'+target).innerHTML = count++;
 		  }
 
 		  return{
-					 connect: function(){
+					 connect: function( doOnMsg ){
 
 								if( websocket != null )
 										  return 
@@ -111,7 +118,6 @@ chatModule = (function(){
 										  //Enviamos el mensaje de arranque de la conexión
 										  socket.send(msg);
 								});
-								socket.addEventListener('onmessage', onMessage);
 								socket.addEventListener('onerror',(error)=>{
 										  alert('Error' + JSON.stingify(error));
 										  socket.close();
@@ -122,6 +128,16 @@ chatModule = (function(){
 										  socket.close();
 										  socket = null;
 								});
+
+								switch( doOnMsg ){
+								case 'chat':
+										  socket.addEventListener('onmessage', onMessageChat );
+										  break;
+								case 'rooms':
+										  socket.addEventListener('onmessage', onMessageChat );
+										  break;
+								}
+
 					 }
 					 
 					 send: function( msg ){
@@ -140,8 +156,8 @@ chatModule = (function(){
 })()
 
 //EXPORTS
-function socket_connect(){
-		  chatModule.connect();
+function socket_connect( msgHandling ){
+		  chatModule.connect(msgHandling);
 }
 function socket_send(msg){
 		  chatModule.send(msg);
@@ -152,5 +168,7 @@ function socket_send(msg){
  -------------------------------------------------------*/
 $(document).ready(function(){
 		  if( window.location.pathname === '/chat' ) //El evento se limita a la página
-					 socket_connect();
+					 socket_connect('chat');
+		  if( window.location.pathname === '/chat' ) //El evento se limita a la página
+					 socket_connect('rooms');
 }
