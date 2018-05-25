@@ -65,8 +65,7 @@ function upoad_image(){
  LOGIN
  -------------------------------------------------------*/
 (function(){
-
-
+		  //Comprobar de forma asíncrona el usuario		  
 })()
 
 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.RoomException;
 import service.RoomService;
+import service.UserService;
 
 /*
  Recibe las peticiones de unirse a una room y lleva al usuario a la ventana de chat.
@@ -35,13 +36,18 @@ public class roomManager extends HttpServlet {
 				System.out.println("Iniciando el servicio de rooms");
 				RoomService.init();
 				System.out.println("Servicio de rooms iniciado");
+				System.out.println("Iniciando el servicio de usuarios");
+				UserService.init();
+				System.out.println("Servicio de usuarios iniciado");
 	 }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			  //TODO Comprobar que el cliente esta conectado y tiene usuario
+			  //Comprobar que el cliente esta conectado y tiene usuario
+			  if(!UserService.isLogged(request.getSession()))
+						 response.getWriter().println("ERROR TERRIBLE: User not logged in!!!");
 
 			  //Crear roomid y userid (Se comunica con roomService)
 			  String userid = (String) request.getSession().getAttribute("userid");
@@ -52,7 +58,7 @@ public class roomManager extends HttpServlet {
 
 						 //Llevar esta información a la request
 						 request.setAttribute("userid",info.getUserId());
-						 request.setAttribute("roompath",request.getContextPath() + info.getUserId()); //Se concatena con el path para que utilizarlo desde js sea más fácil
+						 request.setAttribute("roompath",info.getRoomPath()); //Se concatena con el path para que utilizarlo desde js sea más fácil
 
 						 //Forward hacia el jsp de chat
 						 request.getRequestDispatcher("/chat.jsp").forward(request,response);
@@ -66,7 +72,6 @@ public class roomManager extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 }

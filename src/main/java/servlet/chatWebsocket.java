@@ -10,9 +10,6 @@
 
 package servlet;
 
-import java.io.IOException;
-import java.io.Writer;
-
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -21,21 +18,23 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
-import dominio.InputMessage;
-import service.RoomService;
+import dominio.LoginMessage;
+
+import service.RoomUser;
 
 
-@ServerEndpoint("/actions")
+@ServerEndpoint("/wsEndpoint")
 public class chatWebsocket {
-		  String id;
+
+		  RoomUser user;
 
 		  @OnOpen
 		  public void open(Session session) {
 					 // Identificar al usuario del websocket
 					 // Comunicar con kafka el color del usuario
-					 
-					 id = session.getId();
+
 
 		  }
 
@@ -43,24 +42,32 @@ public class chatWebsocket {
 		  public void close(Session session) {
 					 // DO NOTHING
 					 // Si es posible, logearlo
-					 RoomService.eliminateClient( id );
+					 //RoomService.eliminateClient( id );
 		  }
 
 		  @OnError
-		  public void onError(Throwable error) {
+		  public void onError(Session session, Throwable error) {
 					 //log
-					 RoomService.eliminateClient( id );
+					 //RoomService.eliminateClient( id );
 		  }
 
 		  @OnMessage //Una vez el usuario esté registrado dar el handler al RoomUser
 		  public void handleMessage(String message, Session session) {
 					 // No es necesario identificar al usuario, solamente hace falta enviar mensaje a kafka
-					 Gson gson = new Gson();
-					 InputMessage msg = gson.fromJson( message, InputMessage.class );
-					 if( !RoomService.isClientReg( id ) ){
-								
+					 //if( !RoomService.isClientReg( id ) ){
+					 if( user == null){
+								try{
+										  Gson gson = new Gson();
+										  LoginMessage msg = gson.fromJson( message, LoginMessage.class );
+										  user = RoomUser.userFactory( msg.getId(), msg.getRoom());
+										  //TODO: return ok message
+								}
+								catch(JsonSyntaxException e){ //No envía un mensaje de login
+										  //TODO: return failed message
+								}
+					 }else{
+								user.fwMessage( message );
 					 }
-
 		  }
 }    
 
