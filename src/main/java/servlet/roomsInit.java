@@ -19,7 +19,7 @@ import service.Room;
 /**
  * Servlet implementation class roomsInit
  */
-//@WebServlet("/roomsInit")
+//@WebServlet("/roomsInit") //Este servlet no sirve ninguna petición, solamente está para ser inicializado
 public class roomsInit extends HttpServlet {
 		  private static final long serialVersionUID = 1L;
 
@@ -30,9 +30,11 @@ public class roomsInit extends HttpServlet {
 					 super();
 		  }
 
-		  private Set<Room> rooms;
+		  private Set<Room> rooms; //Se mantiene en :w
+
 
 		  public void init() throws ServletException{
+					 //TODO: inicializar los message hubs!!!!!
 					 System.out.println("Iniciando rooms");
 
 					 Collection<Usuario> usuarios = (new CloudantUsuarioDAO()). getAll();
@@ -51,15 +53,12 @@ public class roomsInit extends HttpServlet {
 			* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 			*/
 		  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-					 // TODO Auto-generated method stub
-					 //response.getWriter().append("Served at: ").append(request.getContextPath());
 		  }
 
 		  /**
 			* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 			*/
 		  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-					 // TODO Auto-generated method stub
 					 doGet(request, response);
 		  }
 

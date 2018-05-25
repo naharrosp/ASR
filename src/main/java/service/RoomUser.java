@@ -37,7 +37,6 @@ public class RoomUser{ //Handeler de los mensajes
 					 }
 
 					 public void fwMessage( String message ){
-								//TODO
+								producer.send( message, "chatRoom");
 					 }
-
 		  }

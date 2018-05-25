@@ -109,6 +109,13 @@
 								<version>1.2</version>
 					 </dependency>
 
+
+					 <dependency>
+								<groupId>com.ibm.watson.developer_cloud</groupId>
+								<artifactId>java-sdk</artifactId>
+								<version>5.2.0</version>
+					 </dependency>
+
 		  </dependencies>
 
 
