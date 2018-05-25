@@ -109,7 +109,6 @@ public class CloudantUsuarioDAO{
 		  public void delete(String id) {
 					 Usuario visitor = db.find(Usuario.class, id);
 					 db.remove(id, visitor.get_rev());
-
 		  }
 
 		  public int count() throws Exception {

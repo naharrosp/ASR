@@ -24,9 +24,9 @@ public class UsuarioConnection {
 
 					 //Obtenemos el usuario
 					 usuario=CloudantUsuarioDAO.getDao().get(idUsuario);
-					 if(usuario==null){
+					 if(usuario==null)
 								throw new NotFoundException("Usuario No encontrado");
-					 }
+
 
 					 //Creamos el productor
 					 productor=new KafkaMessagesProducer(usuario.getChats().iterator().next());
