@@ -100,7 +100,7 @@ chatModule = (function(){
 					 connect: function( doOnMsg ){
 
 								if( websocket != null )
-										  return 
+										  websocket.close(); 
 
 								//Obtener id de usuario y nombre de la habitación
 								var userid = $.('#dataContainer').data('userid'); //TODO: comprobar código html y div.

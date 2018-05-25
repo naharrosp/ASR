@@ -15,6 +15,9 @@ import kafka.KafkaMessagesProducer;
 
 public class UsuarioConnection {
 
+		  //Un único productor puede enviar a múltiples chats, no es necesario más de uno
+		  //Un cliente escucha a todos los posibles chats, el administrador de ws decide qué enviar y si enviar.
+
 		  private Usuario usuario=null;
 		  private HashMap <String, KafkaMessagesConsumer> receptores;
 		  private HashMap <KafkaMessagesConsumer, Thread> matchingThread;
