@@ -39,22 +39,21 @@ public class chatWebsocket {
 					 // Identificar al usuario del websocket
 					 // Comunicar con kafka el color del usuario
 					 if( wsUser == null )
-								wsUser = new HashMap();
-
-					 //String id = session.getId();
+								wsUser = new HashMap<String,UsuarioConnection>();
 		  }
 
 		  @OnClose
 		  public void close(Session session) {
-					 // DO NOTHING
-					 // Si es posible, logearlo
-					 //RoomService.eliminateClient( id );
+					 String id = session.getId();
+					 wsUser.get(id).close();
+					 wsUser.remove(id);
 		  }
 
 		  @OnError
 		  public void onError(Session session, Throwable error) {
-					 //log
-					 //RoomService.eliminateClient( id );
+					 String id = session.getId();
+					 wsUser.get(id).close();
+					 wsUser.remove(id);
 		  }
 
 		  @OnMessage //Una vez el usuario esté registrado dar el handler al RoomUser
@@ -96,5 +95,7 @@ public class chatWebsocket {
 
 					 }
 		  }
- }    
+
+
+}    
 
