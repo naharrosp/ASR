@@ -14,29 +14,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.UserService;
-
-@WebServlet("/login")
-public class login extends HttpServlet {
+/**
+ * Servlet implementation class Login
+ */
+@WebServlet("/welcome")
+public class welcome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public login() {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public welcome() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			  //TODO: Añadir soporte a reconocimiento de imágenes
-			  String username = request.getParameter("username");
-			  String password = request.getParameter("password");
-			  //if(!UserService.loginCheck(username, password)){ //TODO: revisión real
-			  if(!username.equals("david")){
-						 response.getWriter().println("Usuario incorrecto");
-						 return;
-			  }
-			  request.getSession().setAttribute("userid", username);
-			  request.getRequestDispatcher("/rooms.jsp").forward(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/login.jsp").forward(request,response);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

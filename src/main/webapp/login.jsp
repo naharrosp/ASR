@@ -17,19 +17,19 @@ pageEncoding="UTF-8"%>
 										  <div class="col-sm-2"> </div>
 										  <div class="col-sm-8">
 													 <pre>
-#    #    #    ####### #    #    #     #####  #     #    #    ####### 
+#    #    #    ####### #    #    #     #####  #     #    #    #######
 #   #    # #   #       #   #    # #   #     # #     #   # #      #    
-#  #    #   #  #       #  #    #   #  #       #     #  #   #     #    
+#  #    #   #  #       #  #    #   #  #       #     #  #   #     #   
 ###    #     # #####   ###    #     # #       ####### #     #    #    
 #  #   ####### #       #  #   ####### #       #     # #######    #    
 #   #  #     # #       #   #  #     # #     # #     # #     #    #    
 #    # #     # #       #    # #     #  #####  #     # #     #    #    
 Better than irc!!
 													 </pre>
-													 <form role="form" action="" method="POST" >
+													 <form role="form" action="/login" method="POST" >
 																<%--IMAGEN --%>
 																<label for="inputEmail" class="sr-only">Username</label>
-																<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+																<input type="text" id="username" class="form-control" placeholder="Username" required autofocus>
 																<label for="inputPassword" class="sr-only">Password</label>
 																<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 																<br>

@@ -9,12 +9,14 @@ import daoCloudant.CloudantUsuarioDAO;
 
 import dominio.Usuario;
 
+import javassist.NotFoundException;
+
 public class RoomService {
 
 		  private static Set<String> rooms;  //Nombre de la room y la room
 		  //Estas roomStrings solamente se utilizan para comprobaciones
 
-		  private static Map<String, RoomUser> roomUsers; //Id de usuario y roomUser
+		  private static Map<String, UsuarioConnection> roomUsers; //Id de usuario y roomUser
 
 		  private static Set<RoomUserInfo> waitingRoom;
 		  //Datos de usuario que estan listos para pasar al chat;
@@ -31,14 +33,14 @@ public class RoomService {
 
 		  public static void init(){
 					 if( roomUsers == null )
-								roomUsers = new TreeMap<String, RoomUser>();
+								roomUsers = new TreeMap<String, UsuarioConnection>();
 					 if( rooms == null )
 								initRooms();
 					 if( waitingRoom == null )
 								waitingRoom = new TreeSet<RoomUserInfo>();
 		  }
 
-		  public static RoomUserInfo logonUser( String userid, String roomStr) throws RoomException{
+		  public static RoomUserInfo logonUser( String userid, String roomStr) throws RoomException, NotFoundException{
 					 //user debe ser golbalmente identificable
 					 //room debe también ser golbalbment identificable
 
@@ -54,7 +56,7 @@ public class RoomService {
 								throw new RoomException("El usuario no tiene acceso a esa room");
 
 					 //Arranque de dependencias
-					 RoomUser roomUser = new RoomUser(user.getName(), userid, roomStr);
+					 UsuarioConnection roomUser = new UsuarioConnection(userid, roomStr);
 					 roomUsers.put(userid,roomUser);
 
 					 RoomUserInfo info = new RoomUserInfo(userid,roomStr);

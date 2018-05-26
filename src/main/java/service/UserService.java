@@ -30,11 +30,18 @@ public class UserService {
 					 return usuarios.containsKey(userid);
 		  }
 
-		  public static boolean loginCheck(String id, String password, ImageData data){
+		  public static boolean loginCheck(String id, String password){
 					 Usuario user = usuarios.get(id);
 					 if(user == null)
 								return false;
-					 if(user.getPassword() != password)
+					 if(user.getPassword().equals(password))
+								return false;
+					 return true;
+		  }
+
+		  public static boolean loginCheck(String id, String password, ImageData data){
+					 Usuario user = usuarios.get(id);
+					 if(!loginCheck(id, password))
 								return false;
 					 if(!user.getImageData().compare(data))
 								return false;

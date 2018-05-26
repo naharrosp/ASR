@@ -49,6 +49,11 @@ public class UsuarioConnection implements MessageHandler{
 
 		  }
 
+		  public UsuarioConnection(String idUsuario, String chat) throws NotFoundException{
+					 this(idUsuario);
+					 this.chat = chat;
+		  }
+
 		  public UsuarioConnection(String idUsuario, String chat, Writer wsWriter) throws NotFoundException{
 					 this(idUsuario);
 					 this.chat = chat;

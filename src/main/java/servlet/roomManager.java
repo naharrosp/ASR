@@ -65,6 +65,9 @@ public class roomManager extends HttpServlet {
 			  catch(RoomException ex){
 						 response.getWriter().println("Error terrible: " + ex.getMessage());
 			  }
+			  catch(Exception e){
+						 response.getWriter().println("Error terrible: " + e.getMessage());
+			  }
 	}
 
 	/**
