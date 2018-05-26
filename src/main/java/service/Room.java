@@ -5,6 +5,8 @@ import java.util.Collection;
 import kafka.KafkaMessagesConsumer;
 import kafka.KafkaMessagesProducer;
 
+//TODO: Eliminar
+
 public class Room{ //HUB de mensajes kafka
 
 		  public Room( String chat) {

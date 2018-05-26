@@ -38,7 +38,6 @@ public class RoomService {
 								waitingRoom = new TreeSet<RoomUserInfo>();
 		  }
 
-		  //TODO deberá devolver un POJO con el userid la roomid
 		  public static RoomUserInfo logonUser( String userid, String roomStr) throws RoomException{
 					 //user debe ser golbalmente identificable
 					 //room debe también ser golbalbment identificable
@@ -68,12 +67,9 @@ public class RoomService {
 		  }
 
 		  //TODO: incluir el input stream y output stream en el método
-		  public static void loginWebSocket( String userid, String roomStr ) throws RoomException{
+		  public static boolean loginWebSocket( String userid, String roomStr ) throws RoomException{
 					 RoomUserInfo info = new RoomUserInfo(userid,roomStr);
-					 if( !waitingRoom.remove(info))
-								throw new RoomException("El usuario no ha sido registrado y no esta en la sala de espeara");
-
-					 //TODO: casi todo
+					 return waitingRoom.remove(info); //No solamente devuelve si lo ha encontrado sino que también lo elimina.
 		  }
 
 
@@ -81,25 +77,15 @@ public class RoomService {
 					 private String userId;
 					 private String roomPath;
 
-					 /**
-					  * @param userId
-					  * @param roomPath
-					  */
 					 public RoomUserInfo(String userId, String roomPath) {
 								this.userId = userId;
 								this.roomPath = roomPath;
 					 }
 
-					 /**
-					  * @return the userId
-					  */
 					 public String getUserId() {
 								return userId;
 					 }
 
-					 /**
-					  * @return the roomPath
-					  */
 					 public String getRoomPath() {
 								return roomPath;
 					 }

@@ -52,7 +52,6 @@ public class roomManager extends HttpServlet {
 			  //Crear roomid y userid (Se comunica con roomService)
 			  String userid = (String) request.getSession().getAttribute("userid");
 			  String room = (String) request.getParameter("room");
-
 			  try{
 						 RoomService.RoomUserInfo info = RoomService.logonUser(userid, room);
 

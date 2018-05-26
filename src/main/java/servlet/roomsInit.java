@@ -18,10 +18,13 @@ import service.Room;
 
 /**
  * Servlet implementation class roomsInit
+ *
  */
 //@WebServlet("/roomsInit") //Este servlet no sirve ninguna petición, solamente está para ser inicializado
 public class roomsInit extends HttpServlet {
 		  private static final long serialVersionUID = 1L;
+
+//TODO: Eliminar
 
 		  /**
 			* @see HttpServlet#HttpServlet()

@@ -10,6 +10,10 @@
 
 package servlet;
 
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -18,24 +22,26 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
 import dominio.LoginMessage;
 
-import service.RoomUser;
+import service.RoomService;
+import service.UsuarioConnection;
 
 
 @ServerEndpoint("/wsEndpoint")
 public class chatWebsocket {
 
-		  RoomUser user;
+		  private static Map<String,UsuarioConnection> wsUser; //websocketid -usuario
 
 		  @OnOpen
 		  public void open(Session session) {
 					 // Identificar al usuario del websocket
 					 // Comunicar con kafka el color del usuario
+					 if( wsUser == null )
+								wsUser = new HashMap();
 
-
+					 //String id = session.getId();
 		  }
 
 		  @OnClose
@@ -55,19 +61,40 @@ public class chatWebsocket {
 		  public void handleMessage(String message, Session session) {
 					 // No es necesario identificar al usuario, solamente hace falta enviar mensaje a kafka
 					 //if( !RoomService.isClientReg( id ) ){
-					 if( user == null){
+					 String sessionId = session.getId();
+					 Writer wsWriter = null;
+					 if(wsUser.containsKey(sessionId)){
 								try{
 										  Gson gson = new Gson();
 										  LoginMessage msg = gson.fromJson( message, LoginMessage.class );
-										  user = RoomUser.userFactory( msg.getId(), msg.getRoom());
-										  //TODO: return ok message
+										  String userId = msg.getId();
+										  String room = msg.getRoom();
+										  if(!RoomService.loginWebSocket(userId, room))
+													 throw new Exception("El usuario no esta en la sala de espera");
+										  //user = RoomUser.userFactory( msg.getId(), msg.getRoom());
+										  wsWriter = session.getBasicRemote().getSendWriter();
+										  UsuarioConnection uc = new UsuarioConnection(userId, room, wsWriter);
+										  wsUser.put(sessionId, uc);
+										  //TODO: Añadir soporte gson
+										  wsWriter.write("{status: connected}");
 								}
-								catch(JsonSyntaxException e){ //No envía un mensaje de login
-										  //TODO: return failed message
+								catch(Exception ex){
+										  String json = (new Gson()).toJson(ex); //Se envía el error a través de json
+										  try{
+													 if(wsWriter != null)
+																wsWriter.write(json);
+													 else
+																ex.printStackTrace();
+										  }
+										  catch(Exception e){
+													 e.printStackTrace();
+										  }
 								}
-					 }else{
-								user.fwMessage( message );
+					 }else{ // Ya existe el usuario
+								//Utilizar GSON
+								wsUser.get(sessionId).enviarMensaje(message);
+
 					 }
 		  }
-}    
+ }    
 
