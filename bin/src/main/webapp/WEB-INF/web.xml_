@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+		  <display-name>PracticaFinalASR</display-name>
+		  <welcome-file-list>
+					 <welcome-file>index.html</welcome-file>
+					 <welcome-file>index.htm</welcome-file>
+					 <welcome-file>index.jsp</welcome-file>
+					 <welcome-file>default.html</welcome-file>
+					 <welcome-file>default.htm</welcome-file>
+					 <welcome-file>default.jsp</welcome-file>
+		  </welcome-file-list>
+		  <servlet>
+					 <servlet-name>roomManager</servlet-name>
+					 <servlet-class>servlet.roomManager</servlet-class>
+		  </servlet>
+		  <servlet>
+					 <servlet-name>chat</servlet-name>
+					 <servlet-class>servlet.chat</servlet-class>
+		  </servlet>
+		  <servlet>
+					 <servlet-name>Index</servlet-name>
+					 <servlet-class>servlet.Index</servlet-class>
+		  </servlet>
+		  <servlet>
+					 <servlet-name>welcome</servlet-name>
+					 <servlet-class>servlet.welcome</servlet-class>
+		  </servlet>
+		  <servlet-mapping>
+					 <servlet-name>roomManager</servlet-name>
+					 <url-pattern>/chat</url-pattern>
+		  </servlet-mapping>
+		  <servlet-mapping>
+					 <servlet-name>chat</servlet-name>
+					 <url-pattern>/Test2</url-pattern>
+		  </servlet-mapping>
+		  <servlet-mapping>
+					 <servlet-name>Index</servlet-name>
+					 <url-pattern>/Index</url-pattern>
+		  </servlet-mapping>
+		  <servlet-mapping>
+					 <servlet-name>welcome</servlet-name>
+					 <url-pattern>/welcome</url-pattern>
+		  </servlet-mapping>
+</web-app>
