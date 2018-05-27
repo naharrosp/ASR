@@ -21,6 +21,7 @@ import daoCloudant.CloudantUsuarioDAO;
 import dominio.Usuario;
 
 import service.RoomService;
+import service.UserService;
 
 @WebServlet("/login")
 public class login extends HttpServlet {
@@ -55,12 +56,10 @@ public class login extends HttpServlet {
 								response.getWriter().println("Username: " + username);
 								return;
 					 }
-					 //if(!UserService.loginCheck(username, password)){ //TODO: revisión real
-					 if(!username.equals("david")){
-								response.getWriter().println("Usuario incorrecto");
+					 if( !UserService.loginCheck(username,password) ){
+								response.getWriter().println("Usuario o contraseña incorrectos");
 								return;
 					 }
-
 					 request.setAttribute("roomList",(new CloudantUsuarioDAO()).get(username).getChats());
 
 					 request.getSession().setAttribute("userid", username);
