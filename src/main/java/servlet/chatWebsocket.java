@@ -14,7 +14,6 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -29,7 +28,7 @@ import dominio.LoginMessage;
 import service.RoomService;
 import service.UsuarioConnection;
 
-@ApplicationScoped
+
 @ServerEndpoint("/wsEndpoint")
 public class chatWebsocket {
 
