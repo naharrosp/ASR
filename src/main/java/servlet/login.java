@@ -61,7 +61,6 @@ public class login extends HttpServlet {
 								return;
 					 }
 					 request.setAttribute("roomList",(new CloudantUsuarioDAO()).get(username).getChats());
-
 					 request.getSession().setAttribute("userid", username);
 					 request.getRequestDispatcher("/rooms.jsp").forward(request, response);
 		  }
