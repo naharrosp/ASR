@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+#photo_result{
+		  width: 320px;
+		  height: 240px;
+}
+
+#navbar-logo{
+		  color: white;
+}
+
+.msgAuthor{
+			font-style: italic;
+			font: bold;  ;
+}
+
+.msgContent{
+
+}
+
+.chatMsg{
+
+}
+
+/*TODO: añadir más atributos a los colores*/
+.chatMsg.red{
+		  color: red;
+}
+
+.chatMsg.green{
+		  color: green;
+}
+
+.chatMsg.blue{
+		  color: blue;
+}
+
+.chatMsg.orange{
+		  color: orange;
+}
+
+.chatInput{
+		  position: fixed;
+		  bottom: 0;
+		  width: 100%;
+}
