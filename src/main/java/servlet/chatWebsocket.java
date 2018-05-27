@@ -79,6 +79,7 @@ public class chatWebsocket {
 					 System.out.println("Recibido mensaje de Websocket: " + message);
 					 System.out.println("===================");
 					 String sessionId = session.getId();
+					 System.out.println(sessionId);
 					 RemoteEndpoint.Basic wsWriter = null;
 					 if(!wsUser.containsKey(sessionId)){
 								try{
