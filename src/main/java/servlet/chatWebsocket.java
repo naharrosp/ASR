@@ -60,6 +60,7 @@ public class chatWebsocket {
 
 		  @OnError
 		  public void onError(Session session, Throwable error) {
+					 System.out.println("Error launch");
 					 String id = session.getId();
 					 if(!wsUser.containsKey(id)){
 								System.out.println("In error: no user session");
@@ -67,6 +68,7 @@ public class chatWebsocket {
 					 }
 					 wsUser.get(id).close();
 					 wsUser.remove(id);
+					 System.out.println("End of error");
 		  }
 
 		  @OnMessage //Una vez el usuario esté registrado dar el handler al RoomUser
