@@ -60,8 +60,8 @@ public class RoomService {
 										  throw new RoomException("El usuario no tiene acceso a esa room");
 
 								//Arranque de dependencias
-								UsuarioConnection roomUser = new UsuarioConnection(userid, roomStr);
-								roomUsers.put(userid,roomUser);
+								//UsuarioConnection roomUser = new UsuarioConnection(userid, roomStr);
+								//roomUsers.put(userid,roomUser);
 					 }
 								//throw new RoomException("El usuario ya existe");
 

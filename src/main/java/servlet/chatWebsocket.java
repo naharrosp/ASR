@@ -18,6 +18,7 @@ import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
+import javax.websocket.RemoteEndpoint;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
@@ -78,7 +79,7 @@ public class chatWebsocket {
 					 System.out.println("Recibido mensaje de Websocket: " + message);
 					 System.out.println("===================");
 					 String sessionId = session.getId();
-					 Writer wsWriter = null;
+					 RemoteEndpoint.Basic wsWriter = null;
 					 if(!wsUser.containsKey(sessionId)){
 								try{
 										  System.out.println("User unknown, creating connection");
@@ -92,19 +93,20 @@ public class chatWebsocket {
 										  
 										  System.out.println("User logged from waitingRoom");
 
-										  wsWriter = session.getBasicRemote().getSendWriter();
+										  wsWriter = session.getBasicRemote();
 										  UsuarioConnection uc = new UsuarioConnection(userId, room, wsWriter);
 										  wsUser.put(sessionId, uc);
 
 										  System.out.println("User connection included");
 
-										  wsWriter.write("{status: connected}");
+										  //wsWriter.sendText("{status: connected}");
+										  //wsWriter.flush();
 								}
 								catch(Exception ex){
 										  String json = (new Gson()).toJson(ex); //Se envía el error a través de json
 										  try{
 													 if(wsWriter != null)
-																wsWriter.write(json);
+																wsWriter.sendText(json);
 													 else
 																ex.printStackTrace();
 										  }
@@ -114,7 +116,10 @@ public class chatWebsocket {
 								}
 					 }else{ // Ya existe el usuario
 								//Utilizar GSON
-								wsUser.get(sessionId).enviarMensaje(message);
+								//wsUser.get(sessionId).enviarMensaje(message);
+								UsuarioConnection uc = wsUser.get(sessionId);
+								uc.enviarMensaje(message);
+							
 
 					 }
 					 System.out.println("Message reading over");

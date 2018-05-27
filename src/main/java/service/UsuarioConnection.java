@@ -3,6 +3,8 @@ package service;
 import java.io.Writer;
 import java.util.HashMap;
 
+import javax.websocket.RemoteEndpoint;
+
 import IBMToneAnalyzerConnector.ToneAnalyzerConnector;
 
 import daoCloudant.CloudantUsuarioDAO;
@@ -24,7 +26,7 @@ public class UsuarioConnection implements MessageHandler{
 		  private HashMap <KafkaMessagesConsumer, Thread> matchingThread;
 		  private KafkaMessagesProducer productor;
 		  private String chat; //El chat al que el usuario esta escuchando
-		  private Writer wsWriter; //Writer hacia el Websocket si es que este esta conectado
+		  private RemoteEndpoint.Basic wsWriter; //Writer hacia el Websocket si es que este esta conectado
 
 		  
 
@@ -51,13 +53,13 @@ public class UsuarioConnection implements MessageHandler{
 
 		  }
 
-		  public UsuarioConnection(String idUsuario, String chat) throws NotFoundException{
+		  /*public UsuarioConnection(String idUsuario, String chat) throws NotFoundException{
 					 this(idUsuario);
 					 this.chat = chat;
 
-		  }
+		  }*/
 
-		  public UsuarioConnection(String idUsuario, String chat, Writer wsWriter) throws NotFoundException{
+		  public UsuarioConnection(String idUsuario, String chat, RemoteEndpoint.Basic wsWriter) throws NotFoundException{
 					 this(idUsuario);
 					 this.chat = chat;
 					 this.wsWriter = wsWriter;
@@ -76,7 +78,18 @@ public class UsuarioConnection implements MessageHandler{
 		  //TODO: cambiar el chat para mejor soporte gson en tono y usuario
 		  public void enviarMensaje(String mensaje){
 					 String sentimiento=ToneAnalyzerConnector.getToneAnalyzer().analyzeText(mensaje);
-					 mensaje=sentimiento+"@"+mensaje; //TODO: añadir al objeto mensaje
+					 System.out.println(sentimiento);
+					 String color="black";
+					 if(sentimiento.equals("joy")){
+						 color="green";
+					 }else if(sentimiento.equals("fear")){
+						 color="orange";
+					 }else if(sentimiento.equals("sadness")){
+						 color="blue";
+					 }else if(sentimiento.equals("anger")){
+						 color="red";
+					 }
+					 mensaje="{\"color\":\"" + color + "\", \"message\": \"" +  mensaje + "\"}"; //TODO: añadir al objeto mensaje
 
 					 System.out.println("Enviando mensaje de usuario: "+usuario.get_id());
 					 System.out.println("Mensaje: "+mensaje);
@@ -151,8 +164,11 @@ public class UsuarioConnection implements MessageHandler{
 					 //Gestionar mensajes kafka
 					 System.out.println("Recibido mensaje de kafka: " + msg +" | room: "+room);
 					 try{
-								if( room == this.chat )
-										  this.wsWriter.write( msg );
+								if( room.equals( this.chat ) ){
+										//this.wsWriter.write( msg );
+										//this.wsWriter.flush();
+										this.wsWriter.sendText(msg);
+								}
 					 }
 					 catch(Exception e){
 								e.printStackTrace();

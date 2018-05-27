@@ -27,15 +27,15 @@
 }
 
 .chatMsg.green{
-		  color: red;
+		  color: green;
 }
 
 .chatMsg.blue{
-		  color: red;
+		  color: blue;
 }
 
 .chatMsg.orange{
-		  color: red;
+		  color: orange;
 }
 
 .chatInput{

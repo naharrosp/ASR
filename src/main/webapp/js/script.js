@@ -76,7 +76,8 @@ var chatModule = (function(){
 
 		  function onMessageChat( message ){
 
-					 console.log("Mensaje recibido: "+message);
+					 console.log("Mensaje recibido: "+message.data);
+					 
 
 					 var data = JSON.parse(message.data); //TODO: comprobar que se debe atender a data
 
@@ -86,8 +87,8 @@ var chatModule = (function(){
 								'<div class="msgContent">'+ data.message +'</div>'+
 								'<div class="msgAuthor">'+ data.author +'</div>'+
 								'</li>';
-
-					 $('#msgFeed').append(htmlcode);
+					 console.log(htmlcode);
+					 $('#message-board').append(htmlcode);
 		  }
 
 		  function onMessageRooms( message ){
@@ -108,7 +109,7 @@ var chatModule = (function(){
 								//Obtener id de usuario y nombre de la habitación
 								var userid = $('#dataContainer').data('userid'); 
 								var room = $('#dataContainer').data('room'); 
-								var path = 'ws://'+ window.location.host +'/PracticaFinalASR/wsEndpoint' //TODO: flexibilizar
+								var path = 'ws://'+ window.location.host +'/GetStartedTomcat/wsEndpoint' //TODO: flexibilizar
 
 								socket = new WebSocket(path);
 
