@@ -84,8 +84,8 @@ var chatModule = (function(){
 					 //Añadir un mensaje al log de mensajes
 					 var htmlcode =  ''+
 								'<li class="chatMsg '+ data.color +'">'+
+								'<div class="msgAuthor">From '+ data.author +':</div>'+
 								'<div class="msgContent">'+ data.message +'</div>'+
-								'<div class="msgAuthor">'+ data.author +'</div>'+
 								'</li>';
 					 console.log(htmlcode);
 					 $('#message-board').append(htmlcode);
