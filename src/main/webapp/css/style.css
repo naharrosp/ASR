@@ -10,7 +10,8 @@
 }
 
 .msgAuthor{
-
+			font-style: italic;
+			font: bold;  ;
 }
 
 .msgContent{

@@ -89,7 +89,7 @@ public class UsuarioConnection implements MessageHandler{
 					 }else if(sentimiento.equals("anger")){
 						 color="red";
 					 }
-					 mensaje="{\"color\":\"" + color + "\", \"message\": \"" +  mensaje + "\"}"; //TODO: añadir al objeto mensaje
+					 mensaje="{\"color\":\"" + color + "\", \"message\": \"" +  mensaje +"\", \"author\": \"" +  this.usuario.get_id() + "\"}"; //TODO: añadir al objeto mensaje
 
 					 System.out.println("Enviando mensaje de usuario: "+usuario.get_id());
 					 System.out.println("Mensaje: "+mensaje);
