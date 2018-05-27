@@ -28,92 +28,91 @@ import com.google.gson.JsonObject;
 import dominio.Usuario;
 
 
-public class CloudantUsuarioDAO
-{
-	private Database db = null;
-	private static final String databaseName = "usuarios";
-	
-	public CloudantUsuarioDAO(){
-		CloudantClient cloudant = createClient();
-		if(cloudant!=null){
-		 db = cloudant.database(databaseName, true);
-		}
-	}
-	
-	public Database getDB(){
-		return db;
-	}
+public class CloudantUsuarioDAO{
 
-	private static CloudantClient createClient() {
-		
-		String url;
+		  private Database db = null;
+		  private static final String databaseName = "usuarios";
 
-		if (System.getenv("VCAP_SERVICES") != null) {
-			// When running in Bluemix, the VCAP_SERVICES env var will have the credentials for all bound/connected services
-			// Parse the VCAP JSON structure looking for cloudant.
-			JsonObject cloudantCredentials = VCAPHelper.getCloudCredentials("cloudant");
-			if(cloudantCredentials == null){
-				System.out.println("No cloudant database service bound to this application");
-				return null;
-			}
-			url = cloudantCredentials.get("url").getAsString();
-		} else {
-			System.out.println("Running locally. Looking for credentials in cloudant.properties");
-			url = VCAPHelper.getLocalProperties("cloudant.properties").getProperty("cloudant_url");
-			if(url == null || url.length()==0){
-				System.out.println("To use a database, set the Cloudant url in src/main/resources/cloudant.properties");
-				return null;
-			}
-		}
+		  public CloudantUsuarioDAO(){
+					 CloudantClient cloudant = createClient();
+					 if(cloudant!=null){
+								db = cloudant.database(databaseName, true);
+					 }
+		  }
 
-		try {
-			System.out.println("Connecting to Cloudant");
-			CloudantClient client = ClientBuilder.url(new URL(url)).build();
-			return client;
-		} catch (Exception e) {
-			System.out.println("Unable to connect to database");
-			//e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public Collection<Usuario> getAll(){
-        List<Usuario> docs;
-		try {
-			docs = db.getAllDocsRequestBuilder().includeDocs(true).build().getResponse().getDocsAs(Usuario.class);
-		} catch (IOException e) {
-			return null;
-		}
-        return docs;
-	}
+		  public Database getDB(){
+					 return db;
+		  }
 
-	
-	public Usuario get(String id) {
-		return db.find(Usuario.class, id);
-	}
+		  private static CloudantClient createClient() {
 
-	
-	public Usuario persist(Usuario td) {
-		String id = db.save(td).getId();
-		return db.find(Usuario.class, id);
-	}
+					 String url;
 
-	public Usuario update(String id, Usuario newUsuario) {
-		Usuario visitor = db.find(Usuario.class, id);
-		visitor.setName(newUsuario.getName());
-		db.update(visitor);
-		return db.find(Usuario.class, id);
-		
-	}
+					 if (System.getenv("VCAP_SERVICES") != null) {
+								// When running in Bluemix, the VCAP_SERVICES env var will have the credentials for all bound/connected services
+								// Parse the VCAP JSON structure looking for cloudant.
+								JsonObject cloudantCredentials = VCAPHelper.getCloudCredentials("cloudant");
+								if(cloudantCredentials == null){
+										  System.out.println("No cloudant database service bound to this application");
+										  return null;
+								}
+								url = cloudantCredentials.get("url").getAsString();
+					 } else {
+								System.out.println("Running locally. Looking for credentials in cloudant.properties");
+								url = VCAPHelper.getLocalProperties("cloudant.properties").getProperty("cloudant_url");
+								if(url == null || url.length()==0){
+										  System.out.println("To use a database, set the Cloudant url in src/main/resources/cloudant.properties");
+										  return null;
+								}
+					 }
 
-	public void delete(String id) {
-		Usuario visitor = db.find(Usuario.class, id);
-		db.remove(id, visitor.get_rev());
-		
-	}
+					 try {
+								System.out.println("Connecting to Cloudant");
+								CloudantClient client = ClientBuilder.url(new URL(url)).build();
+								return client;
+					 } catch (Exception e) {
+								System.out.println("Unable to connect to database");
+								//e.printStackTrace();
+								return null;
+					 }
+		  }
 
-	public int count() throws Exception {
-		return getAll().size();
-	}
+		  public Collection<Usuario> getAll(){
+					 List<Usuario> docs;
+					 try {
+								docs = db.getAllDocsRequestBuilder().includeDocs(true).build().getResponse().getDocsAs(Usuario.class);
+					 } catch (IOException e) {
+								return null;
+					 }
+					 return docs;
+		  }
+
+
+		  public Usuario get(String id) {
+					 return db.find(Usuario.class, id);
+		  }
+
+
+		  public Usuario persist(Usuario td) {
+					 String id = db.save(td).getId();
+					 return db.find(Usuario.class, id);
+		  }
+
+		  public Usuario update(String id, Usuario newUsuario) {
+					 Usuario visitor = db.find(Usuario.class, id);
+					 visitor.setName(newUsuario.getName());
+					 db.update(visitor);
+					 return db.find(Usuario.class, id);
+
+		  }
+
+		  public void delete(String id) {
+					 Usuario visitor = db.find(Usuario.class, id);
+					 db.remove(id, visitor.get_rev());
+		  }
+
+		  public int count() throws Exception {
+					 return getAll().size();
+		  }
 
 }

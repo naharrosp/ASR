@@ -81,6 +81,7 @@ public class KafkaMessagesProducer {
                     
                     // Send record asynchronously
                     kafkaProducer.send(record);
+						  System.out.println("Enviado mensaje en productor: "+ message +" | para conversación: " + conversation);
                     
 
                 } catch (final Exception e) {
@@ -93,8 +94,8 @@ public class KafkaMessagesProducer {
                 }
             
         } finally {
-            kafkaProducer.close(5000, TimeUnit.MILLISECONDS);
-            logger.log(Level.INFO, KafkaMessagesProducer.class.toString() + " has shut down.");
+            //kafkaProducer.close(5000, TimeUnit.MILLISECONDS);
+            //logger.log(Level.INFO, KafkaMessagesProducer.class.toString() + " has shut down.");
         }
     }
 

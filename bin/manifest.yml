@@ -1,0 +1,10 @@
+---
+applications:
+- name: PracticaFinalASR
+  memory: 512M
+  host: PracticaFinalASR
+  domain: eu-gb.mybluemix.net
+  buildpack: java_buildpack
+  path: target/PracticaFinalASR.war
+  services:
+  - prueba1

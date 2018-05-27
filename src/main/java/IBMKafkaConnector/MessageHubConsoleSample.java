@@ -39,12 +39,12 @@ import IBMKafkaConnector.RESTAdmin;
  * Console-based sample interacting with Message Hub, authenticating with SASL/PLAIN over an SSL connection.
  *
  * Ejemplo de ejecución:
- *  
+ *
  * String bootstrapServers="kafka02-prod02.messagehub.services.eu-gb.bluemix.net:9093,   kafka04-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka01-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka03-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka05-prod02.messagehub.services.eu-gb.bluemix.net:9093";
  * String adminRestURL= "https://kafka-admin-prod02.messagehub.services.eu-gb.bluemix.net:443";
  * String apiKey "ToMM873rB0nmgldXovJ9B2cwUgbRKTxvsQjVf6pwTIkGCbZF";
  * MessageHubConsoleSample.initMessageHubProperties(bootstrapServers, adminRestURL, apiKey);
- * 
+ *
  * Ahora crear los KafkaMessageProducer y Consumer
  */
 public class MessageHubConsoleSample {
@@ -61,10 +61,10 @@ public class MessageHubConsoleSample {
     private static Thread producerThread = null;
     //private static ProducerRunnable producerRunnable = null;
     private static String resourceDir;
-    
+
     private static String apiKey=null;
     private static String adminRestURL=null;
-    
+
     private static Properties clientProperties=new Properties();
 
     //add shutdown hooks (intercept CTRL-C etc.)
@@ -126,7 +126,7 @@ public class MessageHubConsoleSample {
 
                 logger.log(Level.INFO, "Running in Bluemix mode.");
                 resourceDir = userDir + File.separator + APP_NAME + File.separator + "bin" + File.separator + "resources";
-                
+
                 MessageHubCredentials credentials = BluemixEnvironment.getMessageHubCredentials();
 
                 bootstrapServers = stringArrayToCSV(credentials.getKafkaBrokersSasl());
@@ -144,7 +144,8 @@ public class MessageHubConsoleSample {
                 }*/
 
                 logger.log(Level.INFO, "Running in local mode.");
-                resourceDir = userDir + File.separator +"practFinal/get-started-tomcat/src/main/"+ "resources";
+                //resourceDir = userDir + File.separator +"practFinal/get-started-tomcat/src/main/"+ "resources";
+                resourceDir = userDir + File.separator +"workspaces/practFinal/PracticaFinalASR/src/main/"+ "resources";
                 System.out.println("\n\n"+resourceDir+"\n\n");
 
                 //bootstrapServers = args[0];
@@ -271,28 +272,28 @@ public class MessageHubConsoleSample {
         result.setProperty("sasl.jaas.config", saslJaasConfig);
         return result;
     }
-    
+
     /*
      * Poner true: consumer.properties
      * Poner false: producer.properties
      */
-    
+
     public static Properties getClientConfig(boolean consumer_producer){
-    	
-    	
+
+
     	String user = apiKey.substring(0, 16);
         String password = apiKey.substring(16);
-        
+
         Properties properties=null;
         if(consumer_producer)
         	properties = getClientConfiguration(clientProperties, "consumer.properties", user, password);
         else
             properties = getClientConfiguration(clientProperties, "producer.properties", user, password);
-        	
-        	
+
+
     	return properties;
     }
-    
+
     public static void createTopic(String topic){
     	try {
          logger.log(Level.INFO, "Creating the topic " + topic);
@@ -306,7 +307,7 @@ public class MessageHubConsoleSample {
           //The application will carry on regardless of Admin REST errors, as the topic may already exist
       }
    }
-    
+
     public static String getTopics(){
     	String topics=null;
     	try {
