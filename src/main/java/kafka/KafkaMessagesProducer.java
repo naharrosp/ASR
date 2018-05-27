@@ -94,8 +94,8 @@ public class KafkaMessagesProducer {
                 }
             
         } finally {
-            kafkaProducer.close(5000, TimeUnit.MILLISECONDS);
-            logger.log(Level.INFO, KafkaMessagesProducer.class.toString() + " has shut down.");
+            //kafkaProducer.close(5000, TimeUnit.MILLISECONDS);
+            //logger.log(Level.INFO, KafkaMessagesProducer.class.toString() + " has shut down.");
         }
     }
 

@@ -131,7 +131,7 @@ var chatModule = (function(){
 										  socket = null;
 								});
 								socket.addEventListener('close',(close)=>{
-										  alert('Close' + JSON.stingify(error));
+										  ,gclert('Close' + JSON.stingify(error));
 										  console.log('Close' + JSON.stingify(error));
 										  socket.close();
 										  socket = null;
