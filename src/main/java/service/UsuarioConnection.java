@@ -37,9 +37,11 @@ public class UsuarioConnection implements MessageHandler{
 					 if(usuario==null)
 								throw new NotFoundException("Usuario No encontrado");
 
+					 System.out.println("Llega al antes productor");
 					 //Creamos el productor
 					 productor=new KafkaMessagesProducer(usuario.getChats().iterator().next());
 
+					 System.out.println("Llega al antes consumidores ");
 					 //Creamos los receptores
 					 receptores=new HashMap<String, KafkaMessagesConsumer>();
 					 matchingThread=new HashMap<KafkaMessagesConsumer, Thread>();
