@@ -167,13 +167,13 @@ var chatModule = (function(){
 
 //EXPORTS
 function socket_connect( msgHandling ){
-		  alert('on socket connect');
+		  //alert('on socket connect');
 		  chatModule.connect(msgHandling);
 }
 function socket_send(){
-		  alert('on socketSend');
+		  //alert('on socketSend');
 		  msg = $('#messageContent').val();
-		  alert('msg: '+msg);
+		  //alert('msg: '+msg);
 		  chatModule.send(msg);
 }
 
@@ -185,7 +185,7 @@ $(document).ready(function(){
 		  var pathid = loc.substr(loc.lastIndexOf('/') + 1);
 		  switch(pathid){
 		  case 'chat':
-					 alert('Ejecutando conexión de chat');
+					 //alert('Ejecutando conexión de chat');
 					 socket_connect('chat'); break;
 		  case 'rooms':
 					 socket_connect('rooms');
