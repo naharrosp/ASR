@@ -3,7 +3,6 @@
  -------------------------------------------------------*/
 
 //TODO: incluir subida de la imágen
-
 var photoLoginModule = (function(){
 
 		  if(Webcam != null){
@@ -86,14 +85,15 @@ chatModule = (function(){
 								'<div class="msgAuthor">'+ data.author +'</div>'+
 								'</div>';
 
-					 $.('#msgFeed').append(htmlcode);
+					 $('#msgFeed').append(htmlcode);
 		  }
+
 		  function onMessageRooms( message ){
 
 					 var data = JSON.parse(message.data); //TODO: comprobar que se debe atender a data
 					 var target = data.room;
-					 var count = $.('#'+target).innerHTML
-					 $.('#'+target).innerHTML = count++;
+					 var count = $('#'+target).innerHTML
+					 $('#'+target).innerHTML = count++;
 		  }
 
 		  return{
@@ -103,8 +103,8 @@ chatModule = (function(){
 										  websocket.close(); 
 
 								//Obtener id de usuario y nombre de la habitación
-								var userid = $.('#dataContainer').data('userid'); //TODO: comprobar código html y div.
-								var userid = $.('#dataContainer').data('room'); //TODO: comprobar código html y div.
+								var userid = $('#dataContainer').data('userid'); //TODO: comprobar código html y div.
+								var userid = $('#dataContainer').data('room'); //TODO: comprobar código html y div.
 								var path = window.location.hostname;//TODO: comprobar parámetro
 
 								socket = new WebSockets( path );
@@ -138,7 +138,7 @@ chatModule = (function(){
 										  break;
 								}
 
-					 }
+					 },
 					 
 					 send: function( msg ){
 								if( socket.readyState != 1 ){
@@ -146,10 +146,10 @@ chatModule = (function(){
 										  return
 								}
 								//TODO: comprobar si el mensaje es accionado desde un formulario o si se adquiere la información manualmente
-								var msg_ = $.('#msgTextBox').innerHTML;
+								var msg_ = $('#msgTextBox').innerHTML;
 
 								//borramos la caja de texto
-								$.('#msgTextBox').value = '';
+								$('#msgTextBox').value = '';
 								socket.send(msg);
 					 }
 		  }
@@ -157,18 +157,31 @@ chatModule = (function(){
 
 //EXPORTS
 function socket_connect( msgHandling ){
+		  alert('on socket connect');
 		  chatModule.connect(msgHandling);
 }
-function socket_send(msg){
-		  chatModule.send(msg);
+function socket_send(){
+		  alert('on socketSend');
+		  msg = $('#messageContent').value;
+		  alert('msg: '+msg);
+		  //chatModule.send(msg);
 }
 
 /*-------------------------------------------------------
  EVENTS
  -------------------------------------------------------*/
 $(document).ready(function(){
-		  if( window.location.pathname === '/chat' ) //El evento se limita a la página
+		  console.log('ready');
+		  var loc = window.location.pathname;
+		  var pathid = loc.substr(loc.lastIndexOf('/') + 1);
+		  switch(pathid){
+		  case 'chat':
+					 alert('Ejecutando conexión de chat');
 					 socket_connect('chat');
-		  if( window.location.pathname === '/chat' ) //El evento se limita a la página
+					 break;
+		  case 'rooms':
 					 socket_connect('rooms');
-}
+					 break;
+		  }
+})
+

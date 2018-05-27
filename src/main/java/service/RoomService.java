@@ -5,10 +5,9 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import IBMKafkaConnector.MessageHubConsoleSample;
 import daoCloudant.CloudantUsuarioDAO;
-
 import dominio.Usuario;
-
 import javassist.NotFoundException;
 
 public class RoomService {
@@ -24,14 +23,21 @@ public class RoomService {
 		  private static void initRooms(){
 					 //Inicializar la existencia de las rooms
 
+					 System.out.println("Inicializando rooms de RoomService");
+					 MessageHubConsoleSample.initMessageHubProperties("kafka02-prod02.messagehub.services.eu-gb.bluemix.net:9093,   kafka04-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka01-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka03-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka05-prod02.messagehub.services.eu-gb.bluemix.net:9093", "https://kafka-admin-prod02.messagehub.services.eu-gb.bluemix.net:443","ToMM873rB0nmgldXovJ9B2cwUgbRKTxvsQjVf6pwTIkGCbZF");
 					 //Las rooms deberían estar instanciadas en otra clase.
-					 Collection<Usuario> usuarios = (new CloudantUsuarioDAO()). getAll();
+					 Collection<Usuario> usuarios = (new CloudantUsuarioDAO()).getAll();
+					 rooms = new TreeSet<String>();
 
 					 for(Usuario usuario: usuarios)
-								rooms.addAll( usuario.getChats() );
+								rooms.addAll(usuario.getChats());
+
+					 for(String room: rooms)
+								MessageHubConsoleSample.createTopic(room);
 		  }
 
 		  public static void init(){
+					 System.out.println("Inicializando RoomService");
 					 if( roomUsers == null )
 								roomUsers = new TreeMap<String, UsuarioConnection>();
 					 if( rooms == null )
@@ -47,17 +53,18 @@ public class RoomService {
 					 //Comprobaciones sobre los datos 
 					 if( !rooms.contains(roomStr) )
 								throw new RoomException("La room no existe");
-					 if( roomUsers.containsKey(userid) )
-								throw new RoomException("El usuario no existe");
+					 if( !roomUsers.containsKey(userid) ) {//No veo por qué no permitir re-engancharse a la ocnexión
+								Usuario user = (new CloudantUsuarioDAO()).get(userid);
 
-					 Usuario user = (new CloudantUsuarioDAO()).get(userid);
+								if( !user.getChats().contains(roomStr) )
+										  throw new RoomException("El usuario no tiene acceso a esa room");
 
-					 if( !user.getChats().contains(roomStr) )
-								throw new RoomException("El usuario no tiene acceso a esa room");
+								//Arranque de dependencias
+								UsuarioConnection roomUser = new UsuarioConnection(userid, roomStr);
+								roomUsers.put(userid,roomUser);
+					 }
+								//throw new RoomException("El usuario ya existe");
 
-					 //Arranque de dependencias
-					 UsuarioConnection roomUser = new UsuarioConnection(userid, roomStr);
-					 roomUsers.put(userid,roomUser);
 
 					 RoomUserInfo info = new RoomUserInfo(userid,roomStr);
 					 waitingRoom.add(info);
@@ -75,7 +82,7 @@ public class RoomService {
 		  }
 
 
-		  public static class RoomUserInfo{ //Esta clase existe solamente para devolver la información a roomManager
+		  public static class RoomUserInfo implements Comparable<RoomUserInfo>{ //Esta clase existe solamente para devolver la información a roomManager
 					 private String userId;
 					 private String roomPath;
 
@@ -96,6 +103,13 @@ public class RoomService {
 					 public boolean equals(RoomUserInfo o){
 								return userId.equals(o.getUserId()) && roomPath.equals(o.getRoomPath());
 					 }
+					 public int compareTo(RoomUserInfo o){
+								return o.toString().compareTo(o.toString());
+					 }
 		  }
+		  public static Collection<String> getAllRooms(){
+					 return rooms;
+		  }
+
 }
 

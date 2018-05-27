@@ -12,11 +12,12 @@ pageEncoding="UTF-8"%>
 					 <c:import url="/navbar.jsp"/>
 					 <div class="container">
 								<ul>
-										  <c:forEach var="room" items="roomlist">
+										  <c:forEach var="room" items="${roomList}">
 													 <%--COMPLETAR CON HREF A ROOM--%>
-													 <a href="room?dir=${room.dir}" class "list-group-item">
-																${room.name}
+													 <a href="chat?room=${room}" class "list-group-item">
+																${room}
 													 </a>
+													 <br\>
 										  </c:forEach>
 								</ul>
 					 </div>

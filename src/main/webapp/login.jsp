@@ -26,12 +26,12 @@ pageEncoding="UTF-8"%>
 #    # #     # #       #    # #     #  #####  #     # #     #    #    
 Better than irc!!
 													 </pre>
-													 <form role="form" action="/login" method="POST" >
+													 <form role="form" action="login" method="POST" >
 																<%--IMAGEN --%>
 																<label for="inputEmail" class="sr-only">Username</label>
-																<input type="text" id="username" class="form-control" placeholder="Username" required autofocus>
+																<input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
 																<label for="inputPassword" class="sr-only">Password</label>
-																<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+																<input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
 																<br>
 																<input type="submit" class="btn btn-default" value="Login!">
 													 </form>

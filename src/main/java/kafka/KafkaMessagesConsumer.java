@@ -73,7 +73,7 @@ public class KafkaMessagesConsumer implements Runnable {
 													 ConsumerRecords<String, String> records = kafkaConsumer.poll(3000);
 
 													 if (records.isEmpty()) {
-																logger.log(Level.INFO, "No messages consumed");
+																//logger.log(Level.INFO, "No messages consumed");
 													 } else {
 																// Iterate through all the messages received and print their content
 																for (ConsumerRecord<String, String> record : records) {

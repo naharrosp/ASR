@@ -20,16 +20,29 @@ pageEncoding="UTF-8"%>
 								<ul id="message-board">
 								</ul>
 					 </div>
-					 <div class="container-fluid">
+					 <div class="row chatInput">
+								<div class="col-sm-3">
+										  <%--Padding --%>
+								</div>
+								<div class="col-sm-6">
+										  <form action="javascript:socket_send()" method="POST">
+													 <p>
+																<label>Text box</label>
+																<input type = "text"
+																		 id = "messageContent"
+																		 name = "message"
+																		 value = "Escribe aquí" />
+													 </p>
+													 <button type="submit">
+
+																Enviar
+													 </button>
+										  </form>
+								</div>
+								<div class="col-sm-3">
+										  <%--Padding --%>
+								</div>
 								<%--AÑADIR EL SERVERLET PARA MANEJAR LOS MENSAJES DE ENTRADA--%>
-								<form action="" method="POST">
-										  <div class="col-sm-8">
-													 <%--TEXT INPUT--%>
-										  </div>
-										  <button type="submit">
-													 Enviar
-										  </button>
-								</form>
 					 </div>
 		  </body>
 </html>

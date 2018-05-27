@@ -60,6 +60,7 @@ public class chatWebsocket {
 		  public void handleMessage(String message, Session session) {
 					 // No es necesario identificar al usuario, solamente hace falta enviar mensaje a kafka
 					 //if( !RoomService.isClientReg( id ) ){
+					 System.out.print("Recibido mensaje de Websocket" + message);
 					 String sessionId = session.getId();
 					 Writer wsWriter = null;
 					 if(wsUser.containsKey(sessionId)){

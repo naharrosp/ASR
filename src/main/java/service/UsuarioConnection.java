@@ -26,6 +26,8 @@ public class UsuarioConnection implements MessageHandler{
 		  private String chat; //El chat al que el usuario esta escuchando
 		  private Writer wsWriter; //Writer hacia el Websocket si es que este esta conectado
 
+		  
+
 		  public UsuarioConnection(String idUsuario) throws NotFoundException{
 
 					 //Obtenemos el usuario
