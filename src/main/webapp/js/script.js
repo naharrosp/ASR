@@ -91,7 +91,6 @@ var chatModule = (function(){
 		  }
 
 		  function onMessageRooms( message ){
-
 					 console.log("Mensaje recibido: "+message);
 
 					 var data = JSON.parse(message.data); //TODO: comprobar que se debe atender a data
@@ -107,9 +106,9 @@ var chatModule = (function(){
 										  socket.close(); 
 
 								//Obtener id de usuario y nombre de la habitación
-								var userid = $('#dataContainer').data('userid'); //TODO: comprobar código html y div.
-								var room = $('#dataContainer').data('room'); //TODO: comprobar código html y div.
-								var path = 'ws://'+ window.location.host +'/PracticaFinalASR/wsEndpoint'
+								var userid = $('#dataContainer').data('userid'); 
+								var room = $('#dataContainer').data('room'); 
+								var path = 'ws://'+ window.location.host +'/PracticaFinalASR/wsEndpoint' //TODO: flexibilizar
 
 								socket = new WebSocket(path);
 
@@ -125,13 +124,13 @@ var chatModule = (function(){
 													 console.log("Enviado json: "+msg);
 										  },1);
 								});
-								socket.addEventListener('onerror',(error)=>{
+								socket.addEventListener('error',(error)=>{
 										  alert('Error' + JSON.stingify(error));
 										  console.log('Error' + JSON.stingify(error));
 										  socket.close();
 										  socket = null;
 								});
-								socket.addEventListener('onclose',(close)=>{
+								socket.addEventListener('close',(close)=>{
 										  alert('Close' + JSON.stingify(error));
 										  console.log('Close' + JSON.stingify(error));
 										  socket.close();
