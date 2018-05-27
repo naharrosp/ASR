@@ -95,7 +95,9 @@ public class chatWebsocket {
 										  System.out.println("User logged from waitingRoom");
 
 										  wsWriter = session.getBasicRemote();
+										  System.out.println("Llega al 1");
 										  UsuarioConnection uc = new UsuarioConnection(userId, room, wsWriter);
+										  System.out.println("Llega al 2");
 										  wsUser.put(sessionId, uc);
 
 										  System.out.println("User connection included");
