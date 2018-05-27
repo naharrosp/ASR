@@ -71,7 +71,7 @@ function upoad_image(){
 /*-------------------------------------------------------
  CHAT
  -------------------------------------------------------*/
-chatModule = (function(){
+var chatModule = (function(){
 
 		  var socket;
 
@@ -162,7 +162,7 @@ function socket_connect( msgHandling ){
 }
 function socket_send(){
 		  alert('on socketSend');
-		  msg = $('#messageContent').value;
+		  msg = $('#messageContent').val();
 		  alert('msg: '+msg);
 		  //chatModule.send(msg);
 }
