@@ -54,6 +54,7 @@ public class UsuarioConnection implements MessageHandler{
 		  public UsuarioConnection(String idUsuario, String chat) throws NotFoundException{
 					 this(idUsuario);
 					 this.chat = chat;
+
 		  }
 
 		  public UsuarioConnection(String idUsuario, String chat, Writer wsWriter) throws NotFoundException{
@@ -77,7 +78,10 @@ public class UsuarioConnection implements MessageHandler{
 					 String sentimiento=ToneAnalyzerConnector.getToneAnalyzer().analyzeText(mensaje);
 					 mensaje=sentimiento+"@"+mensaje; //TODO: añadir al objeto mensaje
 
-					 productor.send(this.chat, mensaje); 
+					 System.out.println("Enviando mensaje de usuario: "+usuario.get_id());
+					 System.out.println("Mensaje: "+mensaje);
+
+					 productor.send(mensaje, this.chat); 
 		  }
 
 		  public void salirChat(String chat){
@@ -145,6 +149,7 @@ public class UsuarioConnection implements MessageHandler{
 		  @Override
 		  public void onMessage( String msg, String room ){
 					 //Gestionar mensajes kafka
+					 System.out.println("Recibido mensaje de kafka: " + msg +" | room: "+room);
 					 try{
 								if( room == this.chat )
 										  this.wsWriter.write( msg );

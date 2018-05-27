@@ -81,6 +81,7 @@ public class KafkaMessagesProducer {
                     
                     // Send record asynchronously
                     kafkaProducer.send(record);
+						  System.out.println("Enviado mensaje en productor: "+ message +" | para conversación: " + conversation);
                     
 
                 } catch (final Exception e) {

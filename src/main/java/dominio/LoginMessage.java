@@ -3,20 +3,20 @@ package dominio;
 
 public class LoginMessage {
 
-		  private String id;
+		  private String user;
 		  private String room;
 
-		  public LoginMessage(String id, String room) {
-					 this.id = id;
+		  public LoginMessage(String user, String room) {
+					 this.user = user;
 					 this.room = room;
 		  }
 
-		  public String getId() {
-					 return id;
+		  public String getUser() {
+					 return user;
 		  }
 
-		  public void setId(String id) {
-					 this.id = id;
+		  public void setUser(String user) {
+					 this.user = user;
 		  }
 
 		  public String getRoom() {
@@ -26,4 +26,5 @@ public class LoginMessage {
 		  public void setRoom(String room) {
 					 this.room = room;
 		  }
+
 }

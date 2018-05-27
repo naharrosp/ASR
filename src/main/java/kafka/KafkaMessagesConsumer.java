@@ -77,8 +77,9 @@ public class KafkaMessagesConsumer implements Runnable {
 													 } else {
 																// Iterate through all the messages received and print their content
 																for (ConsumerRecord<String, String> record : records) {
-																		  logger.log(Level.INFO, "Message consumed: " + record.toString());
-																		  handler.onMessage( record.toString(), topic );
+																		  //logger.log(Level.INFO, "Message consumed: " + record.toString());
+																		  System.out.println("Mensaje kafka consumido: " + record.value() + "| de topic: " + topic);
+																		  handler.onMessage( record.value(), topic );
 																}
 													 }
 

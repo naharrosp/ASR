@@ -5,7 +5,7 @@
 //TODO: incluir subida de la imágen
 var photoLoginModule = (function(){
 
-		  if(Webcam != null){
+		  if(typeof Webcam != "undefined"){
 					 Webcam.set({
 										  width: 320,
 										  height: 240,
@@ -72,69 +72,78 @@ function upoad_image(){
  CHAT
  -------------------------------------------------------*/
 var chatModule = (function(){
-
-		  var socket;
+		  var socket = null;
 
 		  function onMessageChat( message ){
+
+					 console.log("Mensaje recibido: "+message);
+
 					 var data = JSON.parse(message.data); //TODO: comprobar que se debe atender a data
 
 					 //Añadir un mensaje al log de mensajes
 					 var htmlcode =  ''+
-								'<div class="chatMsg '+ data.color +'">'+
+								'<li class="chatMsg '+ data.color +'">'+
 								'<div class="msgContent">'+ data.message +'</div>'+
 								'<div class="msgAuthor">'+ data.author +'</div>'+
-								'</div>';
+								'</li>';
 
 					 $('#msgFeed').append(htmlcode);
 		  }
 
 		  function onMessageRooms( message ){
 
+					 console.log("Mensaje recibido: "+message);
+
 					 var data = JSON.parse(message.data); //TODO: comprobar que se debe atender a data
 					 var target = data.room;
 					 var count = $('#'+target).innerHTML
-					 $('#'+target).innerHTML = count++;
+					 $('#'+target).innerHTML = count + 1;
 		  }
 
 		  return{
 					 connect: function( doOnMsg ){
 
-								if( websocket != null )
-										  websocket.close(); 
+								if( socket != null )
+										  socket.close(); 
 
 								//Obtener id de usuario y nombre de la habitación
 								var userid = $('#dataContainer').data('userid'); //TODO: comprobar código html y div.
-								var userid = $('#dataContainer').data('room'); //TODO: comprobar código html y div.
-								var path = window.location.hostname;//TODO: comprobar parámetro
+								var room = $('#dataContainer').data('room'); //TODO: comprobar código html y div.
+								var path = 'ws://'+ window.location.host +'/PracticaFinalASR/wsEndpoint'
 
-								socket = new WebSockets( path );
+								socket = new WebSocket(path);
 
 								var msg = JSON.stringify({
 													 user: userid,
 													 room: room
 								});
-
 								socket.addEventListener('open', (open)=>{
 										  //Enviamos el mensaje de arranque de la conexión
-										  socket.send(msg);
+										  console.log('Socket opened');
+										  setTimeout(()=>{
+													 socket.send(msg);
+													 console.log("Enviado json: "+msg);
+										  },1);
 								});
 								socket.addEventListener('onerror',(error)=>{
 										  alert('Error' + JSON.stingify(error));
+										  console.log('Error' + JSON.stingify(error));
 										  socket.close();
 										  socket = null;
 								});
 								socket.addEventListener('onclose',(close)=>{
-										  alert('Error' + JSON.stingify(error));
+										  alert('Close' + JSON.stingify(error));
+										  console.log('Close' + JSON.stingify(error));
 										  socket.close();
 										  socket = null;
 								});
 
 								switch( doOnMsg ){
 								case 'chat':
-										  socket.addEventListener('onmessage', onMessageChat );
+										  socket.addEventListener('message', onMessageChat );
 										  break;
 								case 'rooms':
-										  socket.addEventListener('onmessage', onMessageChat );
+										  socket.addEventListener('message', onMessageChat );
 										  break;
 								}
 
@@ -145,6 +154,7 @@ var chatModule = (function(){
 										  alert("El socket no esta conectado, estado: " + socket.readyState);
 										  return
 								}
+								console.log("Enviando mensaje: "+msg);
 								//TODO: comprobar si el mensaje es accionado desde un formulario o si se adquiere la información manualmente
 								var msg_ = $('#msgTextBox').innerHTML;
 
@@ -164,21 +174,19 @@ function socket_send(){
 		  alert('on socketSend');
 		  msg = $('#messageContent').val();
 		  alert('msg: '+msg);
-		  //chatModule.send(msg);
+		  chatModule.send(msg);
 }
 
 /*-------------------------------------------------------
  EVENTS
  -------------------------------------------------------*/
 $(document).ready(function(){
-		  console.log('ready');
 		  var loc = window.location.pathname;
 		  var pathid = loc.substr(loc.lastIndexOf('/') + 1);
 		  switch(pathid){
 		  case 'chat':
 					 alert('Ejecutando conexión de chat');
-					 socket_connect('chat');
-					 break;
+					 socket_connect('chat'); break;
 		  case 'rooms':
 					 socket_connect('rooms');
 					 break;

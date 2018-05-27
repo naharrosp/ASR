@@ -10,39 +10,36 @@ pageEncoding="UTF-8"%>
 		  </head>
 		  <body>
 					 <c:import url="/navbar.jsp"/>
-
-					 <%--HIDDEN DIV CON TODA LA INFORMACIÓN ACERCA DE COLORES ASOCIADA --%>
-					 <div id="usersInfo" style="visibility:none">
-								<%--${}--%>
+					 <%-- INFORMACIÓN PARA EL WEBSOCKET --%>
+					 <div id="dataContainer" 
+										  data-userid="${userid}"
+										  data-room="${roompath}"
+										  style="visibility:none">
 					 </div>
 
 					 <div class="container">
 								<ul id="message-board">
 								</ul>
-					 </div>
-					 <div class="row chatInput">
-								<div class="col-sm-3">
-										  <%--Padding --%>
-								</div>
-								<div class="col-sm-6">
-										  <form action="javascript:socket_send()" method="POST">
-													 <p>
+								<div class="row chatInput">
+										  <div class="col-sm-3">
+													 <%--Padding --%>
+										  </div>
+										  <div class="col-sm-6">
+													 <form action="javascript:socket_send()" method="POST">
 																<label>Text box</label>
 																<input type = "text"
-																		 id = "messageContent"
-																		 name = "message"
-																		 value = "Escribe aquí" />
-													 </p>
-													 <button type="submit">
-
-																Enviar
-													 </button>
-										  </form>
+																					 id = "messageContent"
+																					 name = "message"
+																					 value = "Escribe aquí" />
+																<button type="submit">
+																		  Enviar
+																</button>
+													 </form>
+										  </div>
+										  <div class="col-sm-3">
+													 <%--Padding --%>
+										  </div>
 								</div>
-								<div class="col-sm-3">
-										  <%--Padding --%>
-								</div>
-								<%--AÑADIR EL SERVERLET PARA MANEJAR LOS MENSAJES DE ENTRADA--%>
 					 </div>
 		  </body>
 </html>

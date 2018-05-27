@@ -14,6 +14,7 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -28,30 +29,42 @@ import dominio.LoginMessage;
 import service.RoomService;
 import service.UsuarioConnection;
 
-
+@ApplicationScoped
 @ServerEndpoint("/wsEndpoint")
 public class chatWebsocket {
 
-		  private static Map<String,UsuarioConnection> wsUser; //websocketid -usuario
+		  private volatile static Map<String,UsuarioConnection> wsUser; //websocketid -usuario
 
 		  @OnOpen
 		  public void open(Session session) {
 					 // Identificar al usuario del websocket
 					 // Comunicar con kafka el color del usuario
+					 System.out.println("Ws opened");
 					 if( wsUser == null )
 								wsUser = new HashMap<String,UsuarioConnection>();
+					 System.out.println("Opening over");
 		  }
 
 		  @OnClose
 		  public void close(Session session) {
+					 System.out.println("Ws closing");
 					 String id = session.getId();
+					 if(!wsUser.containsKey(id)){
+								System.out.println("Closing: no user session");
+								return;
+					 }
 					 wsUser.get(id).close();
 					 wsUser.remove(id);
+					 System.out.println("Closing over");
 		  }
 
 		  @OnError
 		  public void onError(Session session, Throwable error) {
 					 String id = session.getId();
+					 if(!wsUser.containsKey(id)){
+								System.out.println("In error: no user session");
+								return;
+					 }
 					 wsUser.get(id).close();
 					 wsUser.remove(id);
 		  }
@@ -60,22 +73,30 @@ public class chatWebsocket {
 		  public void handleMessage(String message, Session session) {
 					 // No es necesario identificar al usuario, solamente hace falta enviar mensaje a kafka
 					 //if( !RoomService.isClientReg( id ) ){
-					 System.out.print("Recibido mensaje de Websocket" + message);
+					 System.out.println("===================");
+					 System.out.println("Recibido mensaje de Websocket: " + message);
+					 System.out.println("===================");
 					 String sessionId = session.getId();
 					 Writer wsWriter = null;
-					 if(wsUser.containsKey(sessionId)){
+					 if(!wsUser.containsKey(sessionId)){
 								try{
+										  System.out.println("User unknown, creating connection");
+
 										  Gson gson = new Gson();
-										  LoginMessage msg = gson.fromJson( message, LoginMessage.class );
-										  String userId = msg.getId();
+										  LoginMessage msg = gson.fromJson(message, LoginMessage.class);
+										  String userId = msg.getUser();
 										  String room = msg.getRoom();
 										  if(!RoomService.loginWebSocket(userId, room))
 													 throw new Exception("El usuario no esta en la sala de espera");
-										  //user = RoomUser.userFactory( msg.getId(), msg.getRoom());
+										  
+										  System.out.println("User logged from waitingRoom");
+
 										  wsWriter = session.getBasicRemote().getSendWriter();
 										  UsuarioConnection uc = new UsuarioConnection(userId, room, wsWriter);
 										  wsUser.put(sessionId, uc);
-										  //TODO: Añadir soporte gson
+
+										  System.out.println("User connection included");
+
 										  wsWriter.write("{status: connected}");
 								}
 								catch(Exception ex){
@@ -95,6 +116,7 @@ public class chatWebsocket {
 								wsUser.get(sessionId).enviarMensaje(message);
 
 					 }
+					 System.out.println("Message reading over");
 		  }
 
 
