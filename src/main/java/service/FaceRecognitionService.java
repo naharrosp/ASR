@@ -1,4 +1,10 @@
-package src.main.java.service;
+/*package service;
+
+import java.io.File;
+
+import com.ibm.watson.developer_cloud.visual_recognition.v3.VisualRecognition;
+import com.ibm.watson.developer_cloud.visual_recognition.v3.model.DetectFacesOptions;
+import com.ibm.watson.developer_cloud.visual_recognition.v3.model.DetectedFaces;
 
 public class FaceRecognitionService {
 
@@ -32,4 +38,4 @@ public class FaceRecognitionService {
 
 
 
-}
+}*/

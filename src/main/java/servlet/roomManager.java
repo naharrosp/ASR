@@ -36,9 +36,9 @@ public class roomManager extends HttpServlet {
 				System.out.println("Iniciando el servicio de rooms");
 				RoomService.init();
 				System.out.println("Servicio de rooms iniciado");
-				System.out.println("Iniciando el servicio de usuarios");
-				UserService.init();
-				System.out.println("Servicio de usuarios iniciado");
+				//System.out.println("Iniciando el servicio de usuarios");
+				//UserService.init();
+				//System.out.println("Servicio de usuarios iniciado");
 	 }
 
 	/**
