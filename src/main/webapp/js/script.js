@@ -109,7 +109,7 @@ var chatModule = (function(){
 								//Obtener id de usuario y nombre de la habitación
 								var userid = $('#dataContainer').data('userid'); 
 								var room = $('#dataContainer').data('room'); 
-								var path = 'wss://'+ window.location.host +'/wsEndpoint' //TODO: flexibilizar
+								var path = 'ws://'+ window.location.host +'/wsEndpoint' //TODO: flexibilizar
 
 								socket = new WebSocket(path);
 
