@@ -122,13 +122,12 @@ public class MessageHubConsoleSample {
             String password;
 
             // Check environment: Bluemix vs Local, to obtain configuration parameters
-            //if (isRunningInBluemix) {
-            if (false) {
+            if (isRunningInBluemix) {
                 logger.log(Level.INFO, "Running in Bluemix mode.");
-                resourceDir = userDir + File.separator + APP_NAME + File.separator + "bin" + File.separator + "src" + File.separator  + "main" + File.separator + "resources";
-
+                resourceDir = userDir + File.separator + APP_NAME + File.separator + "bin" + File.separator + "resources";
+                System.out.println("LLega antes de credentials");
                 MessageHubCredentials credentials = BluemixEnvironment.getMessageHubCredentials();
-
+                System.out.println("LLega antes de asignat");
                 bootstrapServers = stringArrayToCSV(credentials.getKafkaBrokersSasl());
                 adminRestURL = credentials.getKafkaRestUrl();
                 apiKey = credentials.getApiKey();
