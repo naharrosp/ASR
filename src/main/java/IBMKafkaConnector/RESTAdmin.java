@@ -45,7 +45,7 @@ public class RESTAdmin {
         // topic name already exists.
         return restApi.post("/admin/topics",
                 new CreateTopicParameters(topicName, 
-                        1 /* one partition */, 
+                        5 /* one partition */, 
                         new CreateTopicConfig(_24H_IN_MILLISECONDS)).toString(),
                 new int[] { 422 });
     }
