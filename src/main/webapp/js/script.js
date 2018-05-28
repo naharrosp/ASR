@@ -75,11 +75,12 @@ var photoLoginModule = (function(){
 								//.fail(function( jqXHR, textError ) {
 										  //alert( "error: " + textError );
 								//});
-								$.get('photoLogin?imgSrc='+dataSrc,function(data){
-										  window.location.href = data;
-								})
-								Webcam.upload( data_uri, 'photoLogin', function(code, text) {
-										  window.location.href = data;
+								//$.get('photoLogin?imgSrc='+dataSrc,function(data){
+										  //window.location.href = data;
+								//})
+								Webcam.upload( dataSrc, 'photoLogin', function(code, text) {
+										  if(code===200)
+													 window.location.href = text;
 										  // Upload complete!
 										  // 'code' will be the HTTP response code from the server, e.g. 200
 										  // 'text' will be the raw response content
