@@ -18,8 +18,8 @@ import dominio.ImageData;
 
 public class FaceRecognitionService {
 
-		  VisualRecognition service;
-		  public void init(){
+		  private static VisualRecognition service;
+		  public static void init(){
 					 VisualRecognition service = new VisualRecognition("2018-03-19");
 					 // Set the endpoint
 					 service.setEndPoint("https://gateway.watsonplatform.net/visual-recognition/api");
@@ -31,7 +31,11 @@ public class FaceRecognitionService {
 		  }
 
 
-		  public ImageData processImage(String img) throws Exception{
+		  public static ImageData processImage(String img) throws Exception{
+
+					 System.out.println("On image process");
+					 System.out.println(img);
+
 					 DetectFacesOptions detectFacesOptions = new DetectFacesOptions.Builder()
 								.imagesFile(base64InputStream(img)) //TODO: cambiar file a stream
 								.build();
@@ -46,9 +50,7 @@ public class FaceRecognitionService {
 					 return new ImageData(face.getAge().getMax(), face.getAge().getMax(), face.getGender().getGender());
 		  }
 
-		  public InputStream base64InputStream(String base64String)throws IOException {
+		  public static InputStream base64InputStream(String base64String)throws IOException {
 					 return (new ByteArrayInputStream(DatatypeConverter.parseBase64Binary(base64String)));
 		  }
-
-
 }

@@ -10,7 +10,6 @@ pageEncoding="UTF-8"%>
 		  <body>
 					 <c:import url="/navbar.jsp"/>
 					 <div id="dataContainer" 
-										  data-userid="${userid}"
 										  style="visibility:none">
 
 					 <div class="container">

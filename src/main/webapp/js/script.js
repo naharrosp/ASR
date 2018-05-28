@@ -38,29 +38,57 @@ var photoLoginModule = (function(){
 								})
 					 },
 
-					 upoad_image: function(){
+					 upload_image: function(){
 								if( Webcam === null){
 										  alert("Webacamjs not imported");
 										  return;
 								}
 								var userid = $('#dataContainer').data('userid'); 
-								if(imgSrc == null){
+								if(dataSrc == null){
 										  alert('No image taken');
 										  return;
 								}
-								console.log('userid: ' + userid);
+								var userid = $('#dataContainer').data('userid'); 
 								console.log('imgSrc ' + dataSrc);
 
-								var msg = {
-										  "userid":  userid,
-										  "img": dataSrc
-								}
+								var formData = new FormData();
+								formData.append('imgSrc', dataSrc);
 
-								$.post("photoLogin",msg,(data)=>{
-										  //Me espero una string de redirección
+								//$.post("photoLogin",formData,(data)=>{
+										  ////Me espero una string de redirección
+										  //console.lot('Post revived: ' + data);
+										  //window.location.href = data;
+								//})
+								//$.ajax({
+													 //url : 'photoLogin',
+													 //type: 'POST',
+													 //contentType: false,
+													 //processData: false,
+													 //data: formData,
+													 //cache : false,
+													 //processData: false
+								//})
+								//.done(function(response) {
+										  //alert(response);
+										  //window.location.href = data;
+								//})
+								//.fail(function( jqXHR, textError ) {
+										  //alert( "error: " + textError );
+								//});
+								$.get('photoLogin?imgSrc='+dataSrc,function(data){
 										  window.location.href = data;
 								})
+								Webcam.upload( data_uri, 'photoLogin', function(code, text) {
+										  window.location.href = data;
+										  // Upload complete!
+										  // 'code' will be the HTTP response code from the server, e.g. 200
+										  // 'text' will be the raw response content
+								} );
 
+
+					 },
+					 data_src: function(){
+								return dataSrc;
 					 }
 		  }
 
@@ -71,16 +99,16 @@ function take_snapshot(){
 		  console.log('Snapshot taken');
 		  photoLoginModule.take_snapshot();
 }
-function upoad_image(){
+function upload_image(){
 		  console.log('Upload image launched');
-		  photoLoginModule.upoad_image();
+		  photoLoginModule.upload_image();
 }
 
 /*-------------------------------------------------------
  LOGIN
  -------------------------------------------------------*/
 (function(){
-		  //Comprobar de forma asíncrona el usuario		  
+					 //Comprobar de forma asíncrona el usuario		  
 })()
 
 
@@ -93,7 +121,7 @@ var chatModule = (function(){
 		  function onMessageChat( message ){
 
 					 console.log("Mensaje recibido: "+message.data);
-					 
+
 
 					 var data = JSON.parse(message.data); //TODO: comprobar que se debe atender a data
 
@@ -164,7 +192,7 @@ var chatModule = (function(){
 								}
 
 					 },
-					 
+
 					 send: function( msg ){
 								if( socket.readyState != 1 ){
 										  alert("El socket no esta conectado, estado: " + socket.readyState);
@@ -202,7 +230,8 @@ $(document).ready(function(){
 		  switch(pathid){
 		  case 'chat':
 					 //alert('Ejecutando conexión de chat');
-					 socket_connect('chat'); break;
+					 socket_connect('chat'); 
+					 break;
 		  case 'rooms':
 					 socket_connect('rooms');
 					 break;
