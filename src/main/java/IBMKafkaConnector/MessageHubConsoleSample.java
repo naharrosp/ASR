@@ -122,7 +122,8 @@ public class MessageHubConsoleSample {
             String password;
 
             // Check environment: Bluemix vs Local, to obtain configuration parameters
-            if (isRunningInBluemix) {
+            //if (isRunningInBluemix) {
+            	if(false){
                 logger.log(Level.INFO, "Running in Bluemix mode.");
                 resourceDir = userDir + File.separator + APP_NAME + File.separator + "bin" + File.separator + "resources";
                 System.out.println("LLega antes de credentials");
