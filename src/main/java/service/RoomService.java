@@ -25,6 +25,8 @@ public class RoomService {
 
 					 System.out.println("Inicializando rooms de RoomService");
 					 MessageHubConsoleSample.initMessageHubProperties("kafka02-prod02.messagehub.services.eu-gb.bluemix.net:9093,   kafka04-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka01-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka03-prod02.messagehub.services.eu-gb.bluemix.net:9093, kafka05-prod02.messagehub.services.eu-gb.bluemix.net:9093", "https://kafka-admin-prod02.messagehub.services.eu-gb.bluemix.net:443","ToMM873rB0nmgldXovJ9B2cwUgbRKTxvsQjVf6pwTIkGCbZF");
+					 System.out.println("Properties de RoomService Inicializadas");
+
 					 //Las rooms deberían estar instanciadas en otra clase.
 					 Collection<Usuario> usuarios = (new CloudantUsuarioDAO()).getAll();
 					 rooms = new TreeSet<String>();
