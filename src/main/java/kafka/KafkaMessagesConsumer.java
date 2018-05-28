@@ -33,6 +33,7 @@ import org.apache.log4j.Logger;
 import IBMKafkaConnector.MessageHubConsoleSample;
 
 import service.MessageHandler;
+import servlet.chatWebsocket;
 
 public class KafkaMessagesConsumer implements Runnable {
 		  private static final Logger logger = Logger.getLogger(KafkaMessagesConsumer.class);
@@ -79,7 +80,8 @@ public class KafkaMessagesConsumer implements Runnable {
 																for (ConsumerRecord<String, String> record : records) {
 																		  //logger.log(Level.INFO, "Message consumed: " + record.toString());
 																		  System.out.println("Mensaje kafka consumido: " + record.value() + "| de topic: " + topic);
-																		  handler.onMessage( record.value(), topic );
+																		  for(MessageHandler handler: chatWebsocket.getMap().values())
+																			  handler.onMessage( record.value(), topic );
 																}
 													 }
 
