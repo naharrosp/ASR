@@ -127,6 +127,10 @@ public class chatWebsocket {
 					 }
 					 System.out.println("Message reading over");
 		  }
+		  
+		  public static Map<String,UsuarioConnection> getMap(){
+			  return wsUser;
+		  }
 
 
 }    
