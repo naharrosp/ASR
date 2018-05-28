@@ -15,7 +15,7 @@ var photoLoginModule = (function(){
 					 Webcam.attach( '#my_camera' );
 		  }
 
-		  var dataSrc;
+		  var dataSrc = null;
 
 		  /*
 			Cambiar la función para quizá mostrar la foto y otra para subirla
@@ -43,10 +43,24 @@ var photoLoginModule = (function(){
 										  alert("Webacamjs not imported");
 										  return;
 								}
-								//Recuperar la uri de la imagen
+								var userid = $('#dataContainer').data('userid'); 
+								if(imgSrc == null){
+										  alert('No image taken');
+										  return;
+								}
+								console.log('userid: ' + userid);
+								console.log('imgSrc ' + dataSrc);
 
-								//INVESTIGAR CÓMO SUBIR UNA IMÁGEN EN FORMATO BASE 64
-								//EN SU DEFECTO INVESTIGAR CÓMO SE PUEDE ENVIAR EN OTRO FORMATO
+								var msg = {
+										  "userid":  userid,
+										  "img": dataSrc
+								}
+
+								$.post("photoLogin",msg,(data)=>{
+										  //Me espero una string de redirección
+										  window.location.href = data;
+								})
+
 					 }
 		  }
 
@@ -54,9 +68,11 @@ var photoLoginModule = (function(){
 
 //EXPORTS
 function take_snapshot(){
+		  console.log('Snapshot taken');
 		  photoLoginModule.take_snapshot();
 }
 function upoad_image(){
+		  console.log('Upload image launched');
 		  photoLoginModule.upoad_image();
 }
 
