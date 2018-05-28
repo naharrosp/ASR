@@ -147,7 +147,7 @@ public class MessageHubConsoleSample {
                 //resourceDir = userDir + File.separator +"practFinal/get-started-tomcat/src/main/"+ "resources";
                 resourceDir = userDir + File.separator +"workspaces/practFinal/PracticaFinalASR/src/main/"+ "resources";
                 resourceDir = userDir + File.separator + APP_NAME + File.separator + "bin" + File.separator + "src" + File.separator  + "main" + File.separator + "resources";
-
+                resourceDir = "/home/vcap/app/WEB-INF/classes";
                 System.out.println("\n\n"+resourceDir+"\n\n");
 
                 //bootstrapServers = args[0];
