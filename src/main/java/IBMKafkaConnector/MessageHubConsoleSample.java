@@ -263,6 +263,7 @@ public class MessageHubConsoleSample {
             result.load(propsStream);
             propsStream.close();
         } catch (IOException e) {
+        	e.printStackTrace();
             logger.log(Level.ERROR, "Could not load properties from file");
             return result;
         }
