@@ -15,6 +15,7 @@ import javassist.NotFoundException;
 
 import kafka.KafkaMessagesConsumer;
 import kafka.KafkaMessagesProducer;
+import traductor.Traductor;
 
 public class UsuarioConnection implements MessageHandler{
 
@@ -79,6 +80,7 @@ public class UsuarioConnection implements MessageHandler{
 
 		  //TODO: cambiar el chat para mejor soporte gson en tono y usuario
 		  public void enviarMensaje(String mensaje){
+			  		mensaje=Traductor.translate(mensaje);
 					 String sentimiento=ToneAnalyzerConnector.getToneAnalyzer().analyzeText(mensaje);
 					 System.out.println(sentimiento);
 					 String color="black";
